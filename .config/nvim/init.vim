@@ -18,6 +18,8 @@ set hid  " Buffer becomes hidden when it's abandoned
 set lz   " The screen won't be redrawn while executing macros.
 set so=5 " Minimal number of screen lines to keep above and below the cursor.
 
+autocmd FocusGained,BufEnter * :checktime
+
 colorscheme seoul256
 set background=dark
 
