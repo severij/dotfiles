@@ -7,6 +7,7 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-fugitive'
 Plug 'justinmk/vim-sneak'
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/seoul256.vim'
 
 call plug#end()
@@ -25,8 +26,17 @@ set background=dark
 
 let g:sneak#use_ic_scs = 1
 let g:seoul256_srgb = 1
+let $FZF_DEFAULT_COMMAND='rg --files -S --hidden -g "!{.git}"'
 
 let mapleader = ' '
+
+" Fzf mappings.
+nnoremap <Leader>ff :Files<CR>
+nnoremap <Leader>fh :History<CR>
+nnoremap <Leader>fb :Buffers<CR>
+nnoremap <Leader>fc :Commands<CR>
+nnoremap <Leader>fr :Rg 
+nnoremap <Leader>fl :BLines 
 
 " Git related mappings.
 nnoremap <Leader>gg :Git<CR>
