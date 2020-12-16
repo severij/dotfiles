@@ -28,3 +28,5 @@ set_prompt() {
 
   PS1+="\[\e[0m\]\n└─> "
 }
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
