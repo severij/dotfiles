@@ -1,52 +1,92 @@
 call plug#begin('~/.local/nvim/plugged')
-
+Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-fugitive'
-Plug 'justinmk/vim-sneak'
+Plug 'tpope/vim-vinegar'
+Plug 'wellle/targets.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 Plug 'vim-airline/vim-airline'
-Plug 'jacoborus/tender.vim'
-
+Plug 'morhetz/gruvbox'
 call plug#end()
 
-set nu       " Enable line numbers.
-set hls      " Highlight matching search patterns.
-set ic       " Ignore case when searching
-set scs      " Override 'ignorecase' when the search contains upper case chars.
-set hid      " Buffer becomes hidden when it's abandoned
-set lz       " The screen won't be redrawn while executing macros.
-set so=5     " Minimal # of screen lines to keep above and below the cursor.
-set tgc      " Enable 24-bit RGB color in the TUI.
-set pb=18    " Enable pseudo-transparency for the popup-menu.
-set winbl=18 " Enable pseudo-transparency for a floating window.
-set wop=pum  " Display completion matches using the popup-menu.
+filetype plugin indent on
+syntax enable
+set belloff=all
+set backspace=indent,eol,start
+set complete-=i
+set wildmenu
+set scrolloff=5 sidescrolloff=10
+set hidden
+set ruler
+set lazyredraw
+set encoding=utf-8
+set history=1000
+set termguicolors
+set pumblend=15 winblend=15
+set exrc
+set secure
+set listchars=tab:-->,trail:.,eol:$,extends:>,precedes:<,nbsp:~
+set cursorline
+set inccommand=split
+set nowrapscan
+set showmatch
+set number relativenumber
+set switchbuf=useopen,usetab
+set incsearch hlsearch
+set ignorecase smartcase
+set autoindent
+set smarttab expandtab tabstop=4 shiftwidth=4 
+set undofile
+set directory=.
+set textwidth=80 colorcolumn=+1
+set noequalalways
+set splitright splitbelow
+set mouse=a
 
-autocmd FocusGained,BufEnter * :checktime
+colorscheme gruvbox
+set background=light
 
-colorscheme tender
-set background=dark
+let g:LanguageClient_useVirtualText = 'No'
+let g:LanguageClient_serverCommands = {
+    \ 'python': ['pyls'],
+    \ 'c': ['clangd'],
+    \ 'cpp': ['clangd']
+    \ }
 
 let mapleader = ' '
-let g:sneak#use_ic_scs = 1
 
-" Fzf mappings.
-nnoremap <Leader>ff :Files<CR>
-nnoremap <Leader>fh :History<CR>
-nnoremap <Leader>fb :Buffers<CR>
-nnoremap <Leader>fc :Commands<CR>
-nnoremap <Leader>fr :Rg 
-nnoremap <Leader>fl :BLines 
+function s:find_project_root()
+  let s:root_dir = system(' ')
+  if !empty(s:root_dir)
+    return s:root_dir[:-2]
+  endif
+endfunction
 
-" Git related mappings.
-nnoremap <Leader>gg :Git<CR>
-nnoremap <Leader>gc :Git commit<CR>
-nnoremap <Leader>gb :Git blame<CR>
+function FindInDir(path, bang)
+  if !empty(a:path)
+    call fzf#vim#grep('rg --max-columns 120 --column --line-number --no-heading --color=always --smart-case -- '.shellescape(''), 0, fzf#vim#with_preview({'dir': a:path}), a:bang)
+  endif
+endfunction
 
-" Open terminal and go to insert mode.
-nnoremap <leader>ot :terminal<cr>i
-" Go back to Normal mode with <Esc>.
-tnoremap <Esc> <C-\><C-n>
+command! -bang -nargs=1 -complete=dir FindInDir call FindInDir(<q-args>, <bang>0)
+command! -bang -nargs=0 FindInProject call FindInDir(s:find_project_root(), <bang>0)
+
+nnoremap <leader>ff :Files<cr>
+nnoremap <leader>fb :Buffers<cr>
+nnoremap <leader>fh :History<cr>
+nnoremap <leader>fif :FindInFile<cr>
+nnoremap <leader>fid :FindInDir 
+nnoremap <leader>fip :FindInProject<cr>
+nnoremap <leader>gd <Plug>(lcn-definition)
+
+nnoremap <leader>gg :Git<cr>
+nnoremap <leader>gb :Git blame<cr>
+nnoremap <leader>gl :Git log<cr>
