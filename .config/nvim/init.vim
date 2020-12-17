@@ -9,6 +9,8 @@ Plug 'tpope/vim-vinegar'
 Plug 'wellle/targets.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'justinmk/vim-sneak'
+Plug 'kassio/neoterm'
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
@@ -54,6 +56,10 @@ set mouse=a
 colorscheme gruvbox
 set background=light
 
+let g:sneak#label = 1
+let g:sneak#use_ic_scs = 1
+let g:sneak#target_labels = "ghfjdkslGHFJDKSLbntyBNTYqpa;QPA:"
+
 let g:LanguageClient_useVirtualText = 'No'
 let g:LanguageClient_serverCommands = {
     \ 'python': ['pyls'],
@@ -63,7 +69,14 @@ let g:LanguageClient_serverCommands = {
 
 let mapleader = ' '
 
-function s:find_project_root()
+if executable('rg')
+  set grepprg=rg\ --vimgrep
+  set grepformat=%f:%l:%c:%m
+else
+  let &grepprg='grep -n -R -i --exclude=' . shellescape(&wildignore) . ' $*'
+endif
+
+function! s:find_project_root()
   let s:root_dir = system(' ')
   if !empty(s:root_dir)
     return s:root_dir[:-2]
@@ -76,15 +89,22 @@ function FindInDir(path, bang)
   endif
 endfunction
 
-command! -bang -nargs=1 -complete=dir FindInDir call FindInDir(<q-args>, <bang>0)
-command! -bang -nargs=0 FindInProject call FindInDir(s:find_project_root(), <bang>0)
+" command! -bang -nargs=1 -complete=dir FindInDir call FindInDir(<q-args>, <bang>0)
+" command! -bang -nargs=0 FindInProject call FindInDir(s:find_project_root(), <bang>0)
+
+let g:neoterm_autoinsert = 1
+let g:neoterm_autoscroll = 1
+nnoremap <leader>tt :Tnew<cr>
+nnoremap <leader>tv :vert Tnew<cr>
+nnoremap <leader>th :bel Tnew<cr>
+tnoremap <C-w>c <C-\><C-n>:Tclose<cr>
 
 nnoremap <leader>ff :Files<cr>
 nnoremap <leader>fb :Buffers<cr>
 nnoremap <leader>fh :History<cr>
-nnoremap <leader>fif :FindInFile<cr>
-nnoremap <leader>fid :FindInDir 
-nnoremap <leader>fip :FindInProject<cr>
+" nnoremap <leader>fif :FindInFile<cr>
+" nnoremap <leader>fid :FindInDir 
+" nnoremap <leader>fip :FindInProject<cr>
 nnoremap <leader>gd <Plug>(lcn-definition)
 
 nnoremap <leader>gg :Git<cr>
