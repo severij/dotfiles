@@ -1,5 +1,4 @@
 require('helpers')
-require('lsp_settings')
 
 local packer_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 
@@ -11,6 +10,8 @@ if fn.empty(fn.glob(packer_path)) > 0 then
 else
    require('plugins')
 end
+
+require('lsp_settings')
 
 cmd('filetype plugin indent on')
 cmd('syntax enable')
@@ -58,19 +59,15 @@ opt('o', 'background', 'dark')
 
 vim.g.mapleader = ' '
 
--- let g:sneak#label = 1
--- let g:sneak#use_ic_scs = 1
--- let g:sneak#target_labels = "ghfjdkslGHFJDKSLbntyBNTYqpa;QPA:"
---
--- let g:LanguageClient_useVirtualText = 'No'
--- let g:LanguageClient_serverCommands = {
---     \ 'python': ['pyls'],
---     \ 'c': ['clangd'],
---     \ 'cpp': ['clangd']
---     \ }
---
--- let mapleader = ' '
---
+vim.g['sneak#label'] = 1
+vim.g['sneak#use_ic_scs'] = 1
+vim.g['sneak#target_labels'] = "ghfjdkslGHFJDKSLbntyBNTYqpa;QPA:"
+
+if fn.executable('rg') then
+   opt('o', 'grepprg', 'rg --vimgrep')
+   opt('o', 'grepformat', '%f:%l:%c:%m')
+end
+
 -- if executable('rg')
 --   set grepprg=rg\ --vimgrep
 --   set grepformat=%f:%l:%c:%m

@@ -16,6 +16,18 @@ map('n', ']d', ':lua vim.lsp.diagnostic.goto_next()<CR>')
 
 lspconfig.pyls.setup{ on_attach = completion.on_attach }
 lspconfig.texlab.setup{ on_attach = completion.on_attach }
+lspconfig.clangd.setup{
+   on_attach = completion.on_attach,
+   cmd = {
+      'clangd-10',
+      '--background-index'
+      -- '--compile-commands-dir=/home/<username>/...
+   }
+   -- root_dir = lspconfig.util.root_pattern(
+   --    '/home/<username>/path/to/compile_commands.json
+   --    '.git'
+   -- )
+}
 
 local sumneko_root = vim.fn.expand('$HOME') ..
    '/.language-servers/lua-language-server'
@@ -47,3 +59,4 @@ map('n', 'gD', ':lua vim.lsp.buf.declaration()<CR>')
 map('n', 'gd', ':lua vim.lsp.buf.definition()<CR>')
 map('n', 'gi', ':lua vim.lsp.buf.implementation()<CR>')
 map('n', 'gr', ':lua vim.lsp.buf.references()<CR>')
+map('n', '<Leader>rr', ':lua vim.lsp.buf.rename()<CR>')

@@ -17,8 +17,10 @@ return require('packer').startup(function()
    use {'tpope/vim-vinegar'}
    use {'wellle/targets.vim'}
    use {'justinmk/vim-sneak'}
+   use {'junegunn/fzf', run = function() fn['fzf#install'](0) end }
    use {'junegunn/fzf.vim'}
    use {'morhetz/gruvbox'}
+   use {'skywind3000/asyncrun.vim'}
    use {'vim-airline/vim-airline'}
 -- Plug 'tpope/vim-sensible'
 -- Plug 'kassio/neoterm'
