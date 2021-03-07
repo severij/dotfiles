@@ -4,14 +4,15 @@ local packer_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 
 if fn.empty(fn.glob(packer_path)) > 0 then
    cmd('!git clone https://github.com/wbthomason/packer.nvim ' .. packer_path)
-   require('plugins')
+   require('severij.plugins')
    cmd('PackerCompile')
    cmd('PackerInstall')
 else
-   require('plugins')
+   require('severij.plugins')
 end
 
-require('lsp_settings')
+require('treesitter')
+require('severij.lsp')
 
 cmd('filetype plugin indent on')
 cmd('syntax enable')
@@ -22,18 +23,16 @@ opt('o', 'sidescrolloff', 10)
 opt('o', 'hidden', true)
 opt('o', 'lazyredraw', true)
 opt('o', 'history', 1000)
-opt('o', 'termguicolors', true)
-opt('o', 'pumblend', 15)
-opt('o', 'winblend', 15)
+-- opt('o', 'termguicolors', true)
+-- opt('o', 'pumblend', 15)
+-- opt('o', 'winblend', 15)
 opt('o', 'cursorline', true)
 opt('o', 'inccommand', 'split')
 opt('o', 'wrapscan', false)
 opt('o', 'showmatch', true)
 opt('w', 'number', true)
 opt('w', 'relativenumber', true)
-opt('w', 'relativenumber', true)
 opt('o', 'incsearch', true)
-opt('o', 'hlsearch', true)
 opt('o', 'hlsearch', true)
 opt('o', 'ignorecase', true)
 opt('o', 'smartcase', true)
@@ -54,61 +53,26 @@ opt('o', 'listchars', 'tab:-->,trail:.,eol:$,extends:>,precedes:<,nbsp:~')
 opt('o', 'switchbuf', 'useopen,usetab')
 opt('o', 'completeopt', 'menuone,noinsert,noselect')
 
-vim.cmd('colorscheme gruvbox')
+vim.cmd('colorscheme xenon')
 opt('o', 'background', 'dark')
 
 vim.g.mapleader = ' '
 
 vim.g['sneak#label'] = 1
 vim.g['sneak#use_ic_scs'] = 1
-vim.g['sneak#target_labels'] = "ghfjdkslGHFJDKSLbntyBNTYqpa;QPA:"
+vim.g['sneak#target_labels'] = 'ghfjdkslGHFJDKSLbntyBNTYqpa;QPA:'
 
 if fn.executable('rg') then
    opt('o', 'grepprg', 'rg --vimgrep')
    opt('o', 'grepformat', '%f:%l:%c:%m')
 end
 
--- if executable('rg')
---   set grepprg=rg\ --vimgrep
---   set grepformat=%f:%l:%c:%m
--- else
---   let &grepprg='grep -n -R -i --exclude=' . shellescape(&wildignore) . ' $*'
--- endif
---
--- function! s:find_project_root()
---   let s:root_dir = system(' ')
---   if !empty(s:root_dir)
---     return s:root_dir[:-2]
---   endif
--- endfunction
---
--- function FindInDir(path, bang)
---   if !empty(a:path)
---     call fzf#vim#grep('rg --max-columns 120 --column --line-number --no-heading --color=always --smart-case -- '.shellescape(''), 0, fzf#vim#with_preview({'dir': a:path}), a:bang)
---   endif
--- endfunction
---
--- " command! -bang -nargs=1 -complete=dir FindInDir call FindInDir(<q-args>, <bang>0)
--- " command! -bang -nargs=0 FindInProject call FindInDir(s:find_project_root(), <bang>0)
---
-
-map('', '<leader>ff', ':Files<cr>')
-map('', '<leader>fb', ':Buffers<cr>')
-map('', '<leader>fh', ':History<cr>')
+map('', '<leader>ff', ':Telescope find_files<cr>')
+map('', '<leader>fg', ':Telescope live_grep<cr>')
+map('', '<leader>fb', ':Telescope buffers<cr>')
+map('', '<leader><leader>', ':Telescope file_browser<cr>')
 map('', '<leader>gg', ':Git<cr>')
 map('', '<leader>gb', ':Git blame<cr>')
 map('', '<leader>gl', ':Git log<cr>')
 
--- let g:neoterm_autoinsert = 1
--- let g:neoterm_autoscroll = 1
--- nnoremap <leader>tt :Tnew<cr>
--- nnoremap <leader>tv :vert Tnew<cr>
--- nnoremap <leader>th :bel Tnew<cr>
--- tnoremap <C-w>c <C-\><C-n>:Tclose<cr>
---
--- " nnoremap <leader>fif :FindInFile<cr>
--- " nnoremap <leader>fid :FindInDir
--- " nnoremap <leader>fip :FindInProject<cr>
--- nnoremap <leader>gd <Plug>(lcn-definition)
---
-
+cmd('autocmd TermOpen * setlocal nonumber norelativenumber')
