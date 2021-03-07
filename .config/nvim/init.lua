@@ -12,6 +12,7 @@ else
 end
 
 require('treesitter')
+require('telescope')
 require('severij.lsp')
 
 cmd('filetype plugin indent on')
@@ -70,6 +71,7 @@ end
 map('', '<leader>ff', ':Telescope find_files<cr>')
 map('', '<leader>fg', ':Telescope live_grep<cr>')
 map('', '<leader>fb', ':Telescope buffers<cr>')
+map('', '<leader>f.', ':lua require("severij.telescope").dotfiles()<cr>')
 map('', '<leader><leader>', ':Telescope file_browser<cr>')
 map('', '<leader>gg', ':Git<cr>')
 map('', '<leader>gb', ':Git blame<cr>')
