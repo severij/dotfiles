@@ -28,5 +28,6 @@ return require('packer').startup(function()
   use {'tpope/vim-fugitive'}
   use {'tpope/vim-vinegar'}
   use {'wellle/targets.vim'}
+  use {'mhinz/vim-sayonara'}
   use {'severij/xenon'}
 end)

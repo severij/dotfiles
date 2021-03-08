@@ -50,13 +50,15 @@ vim.g['sneak#use_ic_scs'] = 1
 vim.g['sneak#target_labels'] = 'ghfjdkslGHFJDKSLbntyBNTYqpa;QPA:'
 
 if fn.executable('rg') then
-   opt('o', 'grepprg', 'rg --vimgrep')
-   opt('o', 'grepformat', '%f:%l:%c:%m')
+  opt('o', 'grepprg', 'rg --vimgrep')
+  opt('o', 'grepformat', '%f:%l:%c:%m')
 end
 
+map('', '<leader>bd', ':Sayonara!<cr>')
+map('', '<leader>bD', ':Sayonara<cr>')
 map('', '<leader>ff', ':Telescope find_files<cr>')
 map('', '<leader>fg', ':Telescope live_grep<cr>')
-map('', '<leader>fb', ':Telescope buffers<cr>')
+map('', '<leader>fb', ':lua require("severij.telescope").buffers()<cr>')
 map('', '<leader>f.', ':lua require("severij.telescope").dotfiles()<cr>')
 map('', '<leader><leader>', ':Telescope file_browser<cr>')
 map('', '<leader>gg', ':Git<cr>')
