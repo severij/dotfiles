@@ -10,11 +10,13 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
    }
 )
 
-map('n', '[d', ':lua vim.lsp.diagnostic.goto_prev()<CR>')
-map('n', ']d', ':lua vim.lsp.diagnostic.goto_next()<CR>')
-
+-- Python
 lspconfig.pyls.setup{ on_attach = completion.on_attach }
+
+-- LaTeX
 lspconfig.texlab.setup{ on_attach = completion.on_attach }
+
+-- C/C++
 lspconfig.clangd.setup{
    on_attach = completion.on_attach,
    cmd = {
@@ -28,6 +30,7 @@ lspconfig.clangd.setup{
    -- )
 }
 
+-- Lua
 local sumneko_root = vim.fn.expand('$HOME') ..
    '/.language-servers/lua-language-server'
 local sumneko_binary = sumneko_root .. '/bin/Linux/lua-language-server'
@@ -53,6 +56,9 @@ lspconfig.sumneko_lua.setup{
 
 opt('b', 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+-- Mappings
+map('n', '[d', ':lua vim.lsp.diagnostic.goto_prev()<CR>')
+map('n', ']d', ':lua vim.lsp.diagnostic.goto_next()<CR>')
 map('n', 'K', ':lua vim.lsp.buf.hover()<CR>')
 map('n', 'gD', ':lua vim.lsp.buf.declaration()<CR>')
 map('n', 'gd', ':lua vim.lsp.buf.definition()<CR>')
