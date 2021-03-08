@@ -4,13 +4,10 @@ local packer_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 
 if fn.empty(fn.glob(packer_path)) > 0 then
    cmd('!git clone https://github.com/wbthomason/packer.nvim ' .. packer_path)
-   require('severij.plugins')
-   cmd('PackerCompile')
-   cmd('PackerInstall')
-else
-   require('severij.plugins')
+   cmd('packadd packer.nvim')
 end
 
+require('severij.plugins')
 require('treesitter')
 require('telescope')
 require('severij.lsp')

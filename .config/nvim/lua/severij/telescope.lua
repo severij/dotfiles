@@ -1,9 +1,5 @@
-local make_entry = require('telescope.make_entry')
 local telescope = require('telescope')
-local pickers = require('telescope.pickers')
-local finders = require('telescope.finders')
-
-local conf = require('telescope.config').values
+local builtin = require('telescope.builtin')
 
 telescope.setup {
    extensions = {
@@ -26,7 +22,7 @@ local M = {}
 
 M.dotfiles = function()
    require('telescope.builtin').find_files {
-      cwd = '~',
+      cwd = home_dir,
       find_command = {
          'git', '--git-dir', home_dir .. '/.dotfiles/', '--work-tree', home_dir,
          'ls-tree', '--full-tree', '-r', '--name-only', 'HEAD'

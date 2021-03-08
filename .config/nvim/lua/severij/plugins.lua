@@ -1,5 +1,4 @@
 cmd('packadd packer.nvim')
-cmd('autocmd BufWritePost plugins.lua PackerCompile')
 
 return require('packer').startup(function()
    use {'wbthomason/packer.nvim', opt = true}
