@@ -54,6 +54,8 @@ if fn.executable('rg') then
   opt('o', 'grepformat', '%f:%l:%c:%m')
 end
 
+map('', '[h', ':GitGutterPrevHunk<cr>')
+map('', ']h', ':GitGutterNextHunk<cr>')
 map('', '<leader>bd', ':Sayonara!<cr>')
 map('', '<leader>bD', ':Sayonara<cr>')
 map('', '<leader>ff', ':Telescope find_files<cr>')

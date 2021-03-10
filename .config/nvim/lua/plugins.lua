@@ -30,4 +30,5 @@ return require('packer').startup(function()
   use {'wellle/targets.vim'}
   use {'mhinz/vim-sayonara'}
   use {'severij/xenon'}
+  use {'airblade/vim-gitgutter'}
 end)
