@@ -10,17 +10,15 @@ return require('packer').startup(function()
   use {'wbthomason/packer.nvim', opt = true}
   use {'neovim/nvim-lspconfig', config = require('config.lsp')}
   use {'nvim-lua/completion-nvim'}
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
-    config = require('config.treesitter')
-  }
-  use {
-    'nvim-telescope/telescope.nvim',
-    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
-    config = require('config.telescope')
-  }
-  use {'nvim-telescope/telescope-fzy-native.nvim'}
+--  use {
+--    'nvim-treesitter/nvim-treesitter',
+--    run = ':TSUpdate',
+--    config = require('config.treesitter')
+--  }
+  if vim.fn.executable('fzf') then
+    use {'junegunn/fzf.vim', config = require('config.fzf')}
+  end
+
   use {'tpope/vim-commentary'}
   use {'tpope/vim-sleuth'}
   use {'tpope/vim-surround'}
@@ -29,6 +27,8 @@ return require('packer').startup(function()
   use {'tpope/vim-vinegar'}
   use {'wellle/targets.vim'}
   use {'mhinz/vim-sayonara'}
-  use {'severij/xenon'}
+  use {'junegunn/seoul256.vim'}
   use {'airblade/vim-gitgutter'}
+  use {'justinmk/vim-sneak'}
+  use {'skywind3000/asyncrun.vim'}
 end)

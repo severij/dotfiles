@@ -1,13 +1,43 @@
-require('helpers')
+require('globals')
 require('plugins')
 
 cmd('filetype plugin indent on')
 cmd('syntax enable')
 
+-- Line numbers on always.
+vim.o.number, vim.wo.number = true, true
+
+-- Also enable relative line numbers for easy vertical movement. Sometimes this
+-- can be quite confusing for colleagues not used to vim, so it can also be
+-- toggled with the `yor` mapping provided by vim-unimpaired.
+vim.o.relativenumber, vim.wo.relativenumber = true, true
+
+-- Enable hidden buffers. This is quite crucial and I recommend this to
+-- everybody.
+vim.o.hidden = true
+
+-- I often notice that I have too many open buffers. This deletes the ones from
+-- buffer list that I'm currently not editing.
+vim.o.bufhidden, vim.bo.bufhidden = 'delete', 'delete'
+
+-- This is nice, since it allows you to notice a typo early on.
+vim.o.incsearch = true
+
+-- Sometimes this is useful, but most often just annoying, so it's disabled by
+-- default. I tend to use `yoh` mapping provided in vim-unimpaired to toggle
+-- this option.
+vim.o.hlsearch = false
+
+-- I like to keep this off, so I'll get a lot less unintented matches and it
+-- keeps me misusing the search functionaly. However, sometimes this is very
+-- useful, so I use the `yoi` mapping provided in vim-unimpaired to toggle this.
+vim.o.ignorecase = false
+
+-- Disable wrapscan, since more often this is just confusing.
+vim.o.wrapscan = false
+
 opt('o', 'backspace', 'indent,eol,start')
-opt('o', 'scrolloff', 5)
 opt('o', 'sidescrolloff', 10)
-opt('o', 'hidden', true)
 opt('o', 'lazyredraw', true)
 opt('o', 'history', 1000)
 -- opt('o', 'termguicolors', true)
@@ -15,13 +45,8 @@ opt('o', 'history', 1000)
 -- opt('o', 'winblend', 15)
 opt('o', 'cursorline', true)
 opt('o', 'inccommand', 'split')
-opt('o', 'wrapscan', false)
 opt('o', 'showmatch', true)
-opt('w', 'number', true)
 opt('w', 'relativenumber', true)
-opt('o', 'incsearch', true)
-opt('o', 'hlsearch', true)
-opt('o', 'ignorecase', true)
 opt('o', 'smartcase', true)
 opt('b', 'textwidth', 80)
 opt('w', 'colorcolumn', '+1')
@@ -40,33 +65,32 @@ opt('o', 'listchars', 'tab:-->,trail:.,eol:$,extends:>,precedes:<,nbsp:~')
 opt('o', 'switchbuf', 'useopen,usetab')
 opt('o', 'completeopt', 'menuone,noinsert,noselect')
 
-vim.cmd('colorscheme xenon')
+vim.cmd('colorscheme seoul256')
 opt('o', 'background', 'dark')
 
-vim.g.mapleader = ' '
-
 vim.g['sneak#label'] = 1
-vim.g['sneak#use_ic_scs'] = 1
-vim.g['sneak#target_labels'] = 'ghfjdkslGHFJDKSLbntyBNTYqpa;QPA:'
 
 if fn.executable('rg') then
   opt('o', 'grepprg', 'rg --vimgrep')
   opt('o', 'grepformat', '%f:%l:%c:%m')
 end
 
-map('', '[h', ':GitGutterPrevHunk<cr>')
-map('', ']h', ':GitGutterNextHunk<cr>')
-map('', '<leader>bd', ':Sayonara!<cr>')
-map('', '<leader>bD', ':Sayonara<cr>')
-map('', '<leader>ff', ':Telescope find_files<cr>')
-map('', '<leader>fg', ':Telescope live_grep<cr>')
-map('', '<leader>fb', ':lua require("severij.telescope").buffers()<cr>')
-map('', '<leader>f.', ':lua require("severij.telescope").dotfiles()<cr>')
-map('', '<leader><leader>', ':Telescope file_browser cwd=%:p:h<cr>')
-map('', '<leader>.', ':Telescope file_browser<cr>')
-map('', '<leader>~', ':Telescope file_browser cwd=$HOME<cr>')
-map('', '<leader>gg', ':Git<cr>')
-map('', '<leader>gb', ':Git blame<cr>')
-map('', '<leader>gl', ':Git log<cr>')
+vim.g.mapleader = ' '
+
+map {
+  n = {
+    ['<LEADER>ff'] = ':Files<CR>',
+    ['<LEADER>fb'] = ':Buffers<CR>',
+    ['<LEADER>f.'] = ':Dotfiles<CR>',
+    ['<leader>bd'] = ':Sayonara!<CR>',
+    ['<leader>bD'] = ':Sayonara<CR>',
+    ['[h']         = ':GitGutterPrevHunk<CR>',
+    [']h']         = ':GitGutterNextHunk<CR>',
+    ['<LEADER>gg'] = ':Git<CR>',
+    ['<leader>gb'] = ':Git blame<CR>',
+    ['<leader>gl'] = ':Git log<CR>'
+  }
+}
+map({ n = { ['<LEADER>fF'] = ':Files ', }}, {silent = false})
 
 cmd('autocmd TermOpen * setlocal nonumber norelativenumber')

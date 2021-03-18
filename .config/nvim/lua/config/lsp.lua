@@ -57,11 +57,15 @@ lspconfig.sumneko_lua.setup{
 opt('b', 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
 -- Mappings
-map('n', '[d', ':lua vim.lsp.diagnostic.goto_prev()<CR>')
-map('n', ']d', ':lua vim.lsp.diagnostic.goto_next()<CR>')
-map('n', 'K', ':lua vim.lsp.buf.hover()<CR>')
-map('n', 'gD', ':lua vim.lsp.buf.declaration()<CR>')
-map('n', 'gd', ':lua vim.lsp.buf.definition()<CR>')
-map('n', 'gi', ':lua vim.lsp.buf.implementation()<CR>')
-map('n', 'gr', ':lua vim.lsp.buf.references()<CR>')
-map('n', '<Leader>rr', ':lua vim.lsp.buf.rename()<CR>')
+map {
+  n = {
+    ['[d'] = ':lua vim.lsp.diagnostic.goto_prev()<CR>',
+    [']d'] = ':lua vim.lsp.diagnostic.goto_next()<CR>',
+    ['K'] = ':lua vim.lsp.buf.hover()<CR>',
+    ['gD'] = ':lua vim.lsp.buf.declaration()<CR>',
+    ['gd'] = ':lua vim.lsp.buf.definition()<CR>',
+    ['gi'] = ':lua vim.lsp.buf.implementation()<CR>',
+    ['gr'] = ':lua vim.lsp.buf.references()<CR>',
+    ['<LEADER>rr'] = ':lua vim.lsp.buf.rename()<CR>'
+  }
+}
