@@ -16,9 +16,22 @@ vim.o.relativenumber, vim.wo.relativenumber = true, true
 -- everybody.
 vim.o.hidden = true
 
--- I often notice that I have too many open buffers. This deletes the ones from
--- buffer list that I'm currently not editing.
-vim.o.bufhidden, vim.bo.bufhidden = 'delete', 'delete'
+-- However, I often notice that I have way too many buffers open. This
+-- automatically deletes unneeded buffers once in every three minutes.
+local buf_wipe_interval = 180000 -- in milliseconds
+local time_since_modified_threshold = 1800 -- in seconds
+
+local timer = vim.loop.new_timer()
+timer:start(buf_wipe_interval, buf_wipe_interval, vim.schedule_wrap(function()
+  for _,buf in ipairs(vim.fn['getbufinfo']()) do
+    local time_since_modified =
+        vim.fn['localtime']() - vim.fn['getftime'](buf.name)
+    if buf.hidden == 1 and buf.changed == 0 and
+        time_since_modified > time_since_modified_threshold then
+      vim.api.nvim_buf_delete(buf.bufnr, {})
+    end
+  end
+end))
 
 -- This is nice, since it allows you to notice a typo early on.
 vim.o.incsearch = true
@@ -77,20 +90,41 @@ end
 
 vim.g.mapleader = ' '
 
+run_grepprg = function(pattern, path, ...)
+  local path = path or '.'
+  local args = ""
+  for _,arg in ipairs{...} do
+    args = args .. ' ' .. arg
+  end
+  local old_makeprg = vim.o.makeprg
+  local old_errorformat = vim.o.errorformat
+  vim.o.makeprg = vim.o.grepprg
+  vim.o.errorformat = vim.o.grepformat
+  vim.api.nvim_command(string.format("Make %s %s%s", pattern, path, args))
+  vim.o.makeprg = old_makeprg
+  vim.o.errorformat = old_errorformat
+end
+
+cmd('command! -nargs=+ -complete=dir Grep lua run_grepprg(<f-args>)<CR>')
+
 map {
   n = {
-    ['<LEADER>ff'] = ':Files<CR>',
-    ['<LEADER>fb'] = ':Buffers<CR>',
-    ['<LEADER>f.'] = ':Dotfiles<CR>',
+    ['<leader>ff'] = ':Files<CR>',
+    ['<leader>fb'] = ':Buffers<CR>',
+    ['<leader>f.'] = ':Dotfiles<CR>',
     ['<leader>bd'] = ':Sayonara!<CR>',
     ['<leader>bD'] = ':Sayonara<CR>',
     ['[h']         = ':GitGutterPrevHunk<CR>',
     [']h']         = ':GitGutterNextHunk<CR>',
-    ['<LEADER>gg'] = ':Git<CR>',
+    ['<leader>gg'] = ':Git<CR>',
     ['<leader>gb'] = ':Git blame<CR>',
     ['<leader>gl'] = ':Git log<CR>'
   }
 }
-map({ n = { ['<LEADER>fF'] = ':Files ', }}, {silent = false})
+
+map({ n = {
+  ['<LEADER>fF'] = ':Files ',
+  ['<LEADER>fg'] = ':Grep ',
+}}, {silent = false})
 
 cmd('autocmd TermOpen * setlocal nonumber norelativenumber')

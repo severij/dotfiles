@@ -25,6 +25,7 @@ return require('packer').startup(function()
   use {'tpope/vim-unimpaired'}
   use {'tpope/vim-fugitive'}
   use {'tpope/vim-vinegar'}
+  use {'tpope/vim-dispatch'}
   use {'wellle/targets.vim'}
   use {'mhinz/vim-sayonara'}
   use {'junegunn/seoul256.vim'}
