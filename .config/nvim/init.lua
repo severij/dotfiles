@@ -26,7 +26,7 @@ timer:start(buf_wipe_interval, buf_wipe_interval, vim.schedule_wrap(function()
   for _,buf in ipairs(vim.fn['getbufinfo']()) do
     local time_since_modified =
         vim.fn['localtime']() - vim.fn['getftime'](buf.name)
-    if buf.hidden == 1 and buf.changed == 0 and
+    if buf.hidden == 1 and buf.changed == 0 and not buf.variables.term_title and
         time_since_modified > time_since_modified_threshold then
       vim.api.nvim_buf_delete(buf.bufnr, {})
     end
@@ -49,6 +49,11 @@ vim.o.ignorecase = false
 -- Disable wrapscan, since more often this is just confusing.
 vim.o.wrapscan = false
 
+-- Often I have hard time seeing the cursor. These help a lot.
+vim.o.cursorline, vim.wo.cursorline = true, true
+vim.o.cursorcolumn, vim.wo.cursorcolumn = true, true
+
+
 opt('o', 'backspace', 'indent,eol,start')
 opt('o', 'sidescrolloff', 10)
 opt('o', 'lazyredraw', true)
@@ -56,17 +61,12 @@ opt('o', 'history', 1000)
 -- opt('o', 'termguicolors', true)
 -- opt('o', 'pumblend', 15)
 -- opt('o', 'winblend', 15)
-opt('o', 'cursorline', true)
 opt('o', 'inccommand', 'split')
 opt('o', 'showmatch', true)
 opt('w', 'relativenumber', true)
 opt('o', 'smartcase', true)
 opt('b', 'textwidth', 80)
 opt('w', 'colorcolumn', '+1')
-opt('o', 'smarttab', true)
-opt('b', 'expandtab', true)
-opt('b', 'tabstop', 4)
-opt('b', 'shiftwidth', 4)
 opt('o', 'mouse', 'a')
 opt('o', 'splitright', true)
 opt('o', 'splitbelow', true)
@@ -89,23 +89,6 @@ if fn.executable('rg') then
 end
 
 vim.g.mapleader = ' '
-
-run_grepprg = function(pattern, path, ...)
-  local path = path or '.'
-  local args = ""
-  for _,arg in ipairs{...} do
-    args = args .. ' ' .. arg
-  end
-  local old_makeprg = vim.o.makeprg
-  local old_errorformat = vim.o.errorformat
-  vim.o.makeprg = vim.o.grepprg
-  vim.o.errorformat = vim.o.grepformat
-  vim.api.nvim_command(string.format("Make %s %s%s", pattern, path, args))
-  vim.o.makeprg = old_makeprg
-  vim.o.errorformat = old_errorformat
-end
-
-cmd('command! -nargs=+ -complete=dir Grep lua run_grepprg(<f-args>)<CR>')
 
 map {
   n = {
