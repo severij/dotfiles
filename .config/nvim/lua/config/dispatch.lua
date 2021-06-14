@@ -16,4 +16,4 @@ run_grepprg = function(pattern, path, ...)
   vim.o.errorformat = old_errorformat
 end
 
-cmd('command! -nargs=+ -complete=dir Grep lua run_grepprg(<f-args>)<CR>')
+vim.cmd('command! -nargs=+ -complete=dir Grep lua run_grepprg(<f-args>)<CR>')

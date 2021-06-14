@@ -1,15 +1,8 @@
-cmd = vim.cmd
-fn = vim.fn
+homedir = os.getenv('HOME')
 
 function P(...)
   local objects = vim.tbl_map(vim.inspect, {...})
   print(unpack(objects))
-end
-
-function opt(scope, key, value)
-  local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
-  scopes[scope][key] = value
-    if scope ~= 'o' then scopes['o'][key] = value end
 end
 
 function map(mappings, opts)
@@ -18,5 +11,11 @@ function map(mappings, opts)
     for lhs,rhs in pairs(mode_mappings) do
       vim.api.nvim_set_keymap(mode, lhs, rhs, opts)
     end
+  end
+end
+
+function set_options(options)
+  for lhs,rhs in pairs(options) do
+    vim.opt[lhs] = rhs
   end
 end

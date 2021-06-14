@@ -23,13 +23,13 @@ end
 
 fzf_dotfiles = function(...)
   local spec = vim.fn['fzf#vim#with_preview']{
-    source = 'git --git-dir=$HOME/.dotfiles --work-tree=$HOME ls-files',
+    source = 'git --git-dir=$HOME/.dotfiles ls-files | xargs -i echo $HOME/{}',
     options = set_options(arg),
     sink = 'e'
   }
   vim.fn['fzf#run'](spec)
 end
 
-cmd('command! -nargs=* -complete=dir Files lua fzf_files(<f-args>)<CR>')
-cmd('command! -nargs=* -complete=dir Buffers lua fzf_buffers(<f-args>)<CR>')
-cmd('command! -nargs=* -complete=dir Dotfiles lua fzf_dotfiles(<f-args>)<CR>')
+vim.cmd('command! -nargs=* -complete=dir Files lua fzf_files(<f-args>)<CR>')
+vim.cmd('command! -nargs=* -complete=dir Buffers lua fzf_buffers(<f-args>)<CR>')
+vim.cmd('command! -nargs=* -complete=dir Dotfiles lua fzf_dotfiles(<f-args>)<CR>')

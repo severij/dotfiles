@@ -1,5 +1,5 @@
 lspconfig = require('lspconfig')
-completion = require('completion')
+lsp_signature = require('lsp_signature')
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -10,15 +10,23 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 
+-- Rust
+lspconfig.rls.setup{ on_attach = on_attach }
+
+-- Java
+-- lspconfig.java_language_server.setup{
+--   cmd = { '/usr/share/java/java-language-server/lang_server_linux.sh' },
+-- }
+
 -- Python
-lspconfig.pyls.setup{ on_attach = completion.on_attach }
+lspconfig.pyls.setup{ on_attach = lsp_signature.on_attach }
 
 -- LaTeX
-lspconfig.texlab.setup{ on_attach = completion.on_attach }
+lspconfig.texlab.setup{ on_attach = lsp_signature.on_attach }
 
 -- C/C++
 lspconfig.clangd.setup{
-  on_attach = completion.on_attach,
+  on_attach = lsp_signature.on_attach,
   cmd = {
     'clangd-10',
     '--background-index'
@@ -35,7 +43,7 @@ local sumneko_root = vim.fn.expand('$HOME') ..
   '/.language-servers/lua-language-server'
 local sumneko_binary = sumneko_root .. '/bin/Linux/lua-language-server'
 lspconfig.sumneko_lua.setup{
-  on_attach = completion.on_attach,
+  on_attach = lsp_signature.on_attach,
   cmd = { sumneko_binary, '-E', sumneko_root .. '/main.lua' },
   settings = {
     Lua = {
@@ -54,18 +62,21 @@ lspconfig.sumneko_lua.setup{
   }
 }
 
-opt('b', 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+set_options { omnifunc = 'v:lua.vim.lsp.omnifunc' }
 
 -- Mappings
 map {
   n = {
     ['[d'] = ':lua vim.lsp.diagnostic.goto_prev()<CR>',
     [']d'] = ':lua vim.lsp.diagnostic.goto_next()<CR>',
-    ['K'] = ':lua vim.lsp.buf.hover()<CR>',
-    ['gD'] = ':lua vim.lsp.buf.declaration()<CR>',
-    ['gd'] = ':lua vim.lsp.buf.definition()<CR>',
-    ['gi'] = ':lua vim.lsp.buf.implementation()<CR>',
-    ['gr'] = ':lua vim.lsp.buf.references()<CR>',
-    ['<LEADER>rr'] = ':lua vim.lsp.buf.rename()<CR>'
+    ['<space><space>h'] = ':lua vim.lsp.buf.hover()<CR>',
+    ['<space><space>s'] = ':lua vim.lsp.buf.signature_help()<CR>',
+    ['<space><space>D'] = ':lua vim.lsp.buf.declaration()<CR>',
+    ['<space><space>d'] = ':lua vim.lsp.buf.definition()<CR>',
+    ['<space><space>t'] = ':lua vim.lsp.buf.type_definition()<CR>',
+    ['<space><space>i'] = ':lua vim.lsp.buf.implementation()<CR>',
+    ['<space><space>r'] = ':lua vim.lsp.buf.references()<CR>',
+    ['<space><space>w'] = ':lua vim.lsp.buf.workspace_symbol()<CR>',
+    ['<space><space>R'] = ':lua vim.lsp.buf.rename()<CR>'
   }
 }
