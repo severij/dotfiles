@@ -1,5 +1,5 @@
 lspconfig = require('lspconfig')
-lsp_signature = require('lsp_signature')
+completion = require('completion')
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -11,22 +11,17 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 -- Rust
-lspconfig.rls.setup{ on_attach = on_attach }
-
--- Java
--- lspconfig.java_language_server.setup{
---   cmd = { '/usr/share/java/java-language-server/lang_server_linux.sh' },
--- }
+lspconfig.rust_analyzer.setup{ on_attach = completion.on_attach }
 
 -- Python
-lspconfig.pyls.setup{ on_attach = lsp_signature.on_attach }
+lspconfig.pyls.setup{ on_attach = completion.on_attach }
 
 -- LaTeX
-lspconfig.texlab.setup{ on_attach = lsp_signature.on_attach }
+lspconfig.texlab.setup{ on_attach = completion.on_attach }
 
 -- C/C++
 lspconfig.clangd.setup{
-  on_attach = lsp_signature.on_attach,
+  on_attach = completion.on_attach,
   cmd = {
     'clangd-10',
     '--background-index'
@@ -43,7 +38,7 @@ local sumneko_root = vim.fn.expand('$HOME') ..
   '/.language-servers/lua-language-server'
 local sumneko_binary = sumneko_root .. '/bin/Linux/lua-language-server'
 lspconfig.sumneko_lua.setup{
-  on_attach = lsp_signature.on_attach,
+  on_attach = completion.on_attach,
   cmd = { sumneko_binary, '-E', sumneko_root .. '/main.lua' },
   settings = {
     Lua = {

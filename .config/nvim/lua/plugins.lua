@@ -9,14 +9,12 @@ vim.cmd('packadd packer.nvim')
 return require('packer').startup(function()
   use {'wbthomason/packer.nvim', opt = true}
   use {'neovim/nvim-lspconfig', config = require('config.lsp')}
-  use {'kabouzeid/nvim-lspinstall'}
-  use {'ray-x/lsp_signature.nvim'}
   use {'nvim-lua/completion-nvim'}
-  -- use {
-  --   'nvim-treesitter/nvim-treesitter',
-  --   run = ':TSUpdate',
-  --   config = require('config.treesitter')
-  -- }
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    config = require('config.treesitter')
+  }
   use {'junegunn/fzf.vim', config = require('config.fzf')}
   use {'junegunn/fzf', run = vim.fn['fzf#install']}
 
