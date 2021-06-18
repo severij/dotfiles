@@ -75,18 +75,19 @@ vim.g.mapleader = ' '
 
  map {
    n = {
-     ['<leader>bk'] = ':lua vim.b.keep_open = true<CR>',
-     ['<leader>ff'] = ':Files<CR>',
-     ['<leader>fb'] = ':Buffers<CR>',
-     ['<leader>f.'] = ':Dotfiles<CR>',
-     ['<leader>bd'] = ':Sayonara!<CR>',
-     ['<leader>bD'] = ':Sayonara<CR>',
-     ['[h']         = ':GitGutterPrevHunk<CR>',
-     [']h']         = ':GitGutterNextHunk<CR>',
-     ['<leader>gg'] = ':Git<CR>',
-     ['<leader>gb'] = ':Git blame<CR>',
-     ['<leader>gl'] = ':Git log<CR>',
-     ['<leader><Tab>'] = ':NvimTreeToggle<CR>'
+     ['<leader>bk']    = ':lua vim.b.keep_open = true<CR>',
+     ['<leader>ff']    = ':Files<CR>',
+     ['<leader>fb']    = ':Buffers<CR>',
+     ['<leader>f.']    = ':Dotfiles<CR>',
+     ['<leader>bd']    = ':Sayonara!<CR>',
+     ['<leader>bD']    = ':Sayonara<CR>',
+     ['[h']            = ':GitGutterPrevHunk<CR>',
+     [']h']            = ':GitGutterNextHunk<CR>',
+     ['<leader>gg']    = ':Git<CR>',
+     ['<leader>gb']    = ':Git blame<CR>',
+     ['<leader>gl']    = ':Git log<CR>',
+     ['<leader><Tab>'] = ':NvimTreeToggle<CR>',
+     ['-']             = ':NvimTreeFindFile<CR>'
    }
  }
  
