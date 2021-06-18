@@ -40,7 +40,7 @@ set_options {
   winblend = 15,
   inccommand = 'split',
   showmatch = true,
-  textwidth = 80,
+  textwidth = 100,
   colorcolumn = '+1',
   smarttab = true,
   expandtab = true,
@@ -60,8 +60,12 @@ set_options {
 
 vim.cmd('colorscheme gruvbox')
 
-vim.g['sneak#label'] = 1
-vim.g['sneak#use_ic_scs'] = 1
+set_global_vars {
+  mapleader = ' ',
+  nvim_tree_width = 60,
+  ['sneak#label'] = 1,
+  ['sneak#use_ic_scs'] = 1
+}
 
 if vim.fn.executable('rg') then
   local rg_cmd = 'rg --vimgrep'
@@ -71,29 +75,27 @@ if vim.fn.executable('rg') then
   }
 end
 
-vim.g.mapleader = ' '
-
- map {
-   n = {
-     ['<leader>bk']    = ':lua vim.b.keep_open = true<CR>',
-     ['<leader>ff']    = ':Files<CR>',
-     ['<leader>fb']    = ':Buffers<CR>',
-     ['<leader>f.']    = ':Dotfiles<CR>',
-     ['<leader>bd']    = ':Sayonara!<CR>',
-     ['<leader>bD']    = ':Sayonara<CR>',
-     ['[h']            = ':GitGutterPrevHunk<CR>',
-     [']h']            = ':GitGutterNextHunk<CR>',
-     ['<leader>gg']    = ':Git<CR>',
-     ['<leader>gb']    = ':Git blame<CR>',
-     ['<leader>gl']    = ':Git log<CR>',
-     ['<leader><Tab>'] = ':NvimTreeToggle<CR>',
-     ['-']             = ':NvimTreeFindFile<CR>'
-   }
- }
+map {
+  n = {
+    ['<leader>bk']    = ':lua vim.b.keep_open = true<CR>',
+    ['<leader>ff']    = ':Files<CR>',
+    ['<leader>fb']    = ':Buffers<CR>',
+    ['<leader>f.']    = ':Dotfiles<CR>',
+    ['<leader>bd']    = ':Sayonara!<CR>',
+    ['<leader>bD']    = ':Sayonara<CR>',
+    ['[h']            = ':GitGutterPrevHunk<CR>',
+    [']h']            = ':GitGutterNextHunk<CR>',
+    ['<leader>gg']    = ':Git<CR>',
+    ['<leader>gb']    = ':Git blame<CR>',
+    ['<leader>gl']    = ':Git log<CR>',
+    ['<leader><Tab>'] = ':NvimTreeToggle<CR>',
+    ['-']             = ':NvimTreeFindFile<CR>'
+  }
+}
  
- map({ n = {
-   ['<LEADER>fF'] = ':Files ',
-   ['<LEADER>fg'] = ':Grep ',
- }}, {silent = false})
+map({ n = {
+  ['<LEADER>fF'] = ':Files ',
+  ['<LEADER>fg'] = ':Grep ',
+}}, {silent = false})
 
 vim.cmd('autocmd TermOpen * setlocal nonumber norelativenumber')

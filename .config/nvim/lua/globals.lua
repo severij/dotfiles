@@ -19,3 +19,9 @@ function set_options(options)
     vim.opt[lhs] = rhs
   end
 end
+
+function set_global_vars(options)
+  for lhs,rhs in pairs(options) do
+    vim.g[lhs] = rhs
+  end
+end
