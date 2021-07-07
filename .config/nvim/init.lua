@@ -47,7 +47,9 @@ set_global_vars {
   mapleader = ' ',
   nvim_tree_width = 60,
   ['sneak#label'] = 1,
-  ['sneak#use_ic_scs'] = 1
+  ['sneak#use_ic_scs'] = 1,
+  fzf_preview_window = {'down:50%', 'ctrl-/'},
+  fzf_layout = { window = { width = 0.95, height = 0.9 } }
 }
 
 if vim.fn.executable('rg') then
@@ -61,6 +63,7 @@ end
  map {
    n = {
      ['<leader>ff']    = ':Files<CR>',
+     ['<leader>fG']    = ':Rg<CR>',
      ['<leader>fb']    = ':Buffers<CR>',
      ['<leader>f.']    = ':Dotfiles<CR>',
      ['[h']            = ':GitGutterPrevHunk<CR>',
@@ -77,7 +80,7 @@ end
  
 map({ n = {
   ['<LEADER>fF'] = ':Files ',
-  ['<LEADER>fg'] = ':Grep ',
+  ['<leader>fg']    = ':Rg '
 }}, {silent = false})
 
 vim.cmd('autocmd TermOpen * setlocal nonumber')
