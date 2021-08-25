@@ -13,25 +13,14 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 -- Rust
 lspconfig.rust_analyzer.setup{ on_attach = completion.on_attach }
 
--- Python
-lspconfig.pyls.setup{ on_attach = completion.on_attach }
-
 -- LaTeX
 lspconfig.texlab.setup{ on_attach = completion.on_attach }
 
+-- Python
+lspconfig.pylsp.setup { on_attach = completion.on_attach }
+
 -- C/C++
-lspconfig.clangd.setup{
-  on_attach = completion.on_attach,
-  cmd = {
-    'clangd-10',
-    '--background-index'
-    -- '--compile-commands-dir=/home/<username>/...
-  }
-  -- root_dir = lspconfig.util.root_pattern(
-  --    '/home/<username>/path/to/compile_commands.json
-  --    '.git'
-  -- )
-}
+lspconfig.clangd.setup{ on_attach = completion.on_attach }
 
 -- Lua
 local sumneko_root = vim.fn.expand('$HOME') ..

@@ -48,6 +48,14 @@ set_global_vars {
   nvim_tree_width = 60,
   ['sneak#label'] = 1,
   ['sneak#use_ic_scs'] = 1,
+  bufferline = {
+    animation = false,
+    auto_hide = true,
+    closable = false,
+    icons = false,
+    maximum_padding = 1,
+    maximum_length = 40
+  },
   fzf_preview_window = {'down:50%', 'ctrl-/'},
   fzf_layout = { window = { width = 0.95, height = 0.9 } }
 }
@@ -74,7 +82,17 @@ end
      ['<C-s>']         = ':BufferPick<CR>',
      ['<leader>bd']    = ':BufferClose<CR>',
      ['<leader><Tab>'] = ':NvimTreeToggle<CR>',
-     ['-']             = ':NvimTreeFindFile<CR>'
+     ['-']             = ':NvimTreeFindFile<CR>',
+     ['<C-space>']     = ':set bufhidden=hide<CR>',
+     ['<leader>1']     = ':BufferGoto 1<CR>',
+     ['<leader>2']     = ':BufferGoto 2<CR>',
+     ['<leader>3']     = ':BufferGoto 3<CR>',
+     ['<leader>4']     = ':BufferGoto 4<CR>',
+     ['<leader>5']     = ':BufferGoto 5<CR>',
+     ['<leader>6']     = ':BufferGoto 6<CR>',
+     ['<leader>7']     = ':BufferGoto 7<CR>',
+     ['<leader>8']     = ':BufferGoto 8<CR>',
+     ['<leader>9']     = ':BufferGoto 9<CR>'
    }
  }
  
@@ -84,3 +102,4 @@ map({ n = {
 }}, {silent = false})
 
 vim.cmd('autocmd TermOpen * setlocal nonumber')
+vim.cmd('autocmd BufReadPost * set bufhidden=delete')
