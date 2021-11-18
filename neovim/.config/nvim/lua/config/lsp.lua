@@ -1,5 +1,5 @@
-lspconfig = require('lspconfig')
-completion = require('completion')
+local lspconfig = require'lspconfig'
+local capabilities = require'cmp_nvim_lsp'.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -11,24 +11,23 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 -- Rust
-lspconfig.rust_analyzer.setup{ on_attach = completion.on_attach }
+lspconfig.rust_analyzer.setup{ capabilities = capabilities }
 
--- LaTeX
-lspconfig.texlab.setup{ on_attach = completion.on_attach }
+-- -- LaTeX
+lspconfig.texlab.setup{ capabilities = capabilities }
 
--- Python
-lspconfig.pylsp.setup { on_attach = completion.on_attach }
+-- -- Python
+lspconfig.pylsp.setup{ capabilities = capabilities }
 
--- C/C++
-lspconfig.clangd.setup{ on_attach = completion.on_attach }
+-- -- C/C++
+lspconfig.clangd.setup{ capabilities = capabilities }
 
 -- Lua
-local sumneko_root = vim.fn.expand('$HOME') ..
-  '/.language-servers/lua-language-server'
-local sumneko_binary = sumneko_root .. '/bin/Linux/lua-language-server'
+local sumneko_root = '/usr/share/lua-language-server/'
+local sumneko_binary = '/usr/bin/lua-language-server'
 lspconfig.sumneko_lua.setup{
-  on_attach = completion.on_attach,
-  cmd = { sumneko_binary, '-E', sumneko_root .. '/main.lua' },
+  capabilities = capabilities,
+  cmd = { sumneko_binary, '-E', sumneko_root .. 'main.lua' },
   settings = {
     Lua = {
       runtime = {

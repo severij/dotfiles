@@ -7,11 +7,13 @@ vim.cmd('syntax enable')
 set_options {
   number = true,
   relativenumber = true,
+  pumheight = 10,
   hidden = true,
   incsearch = true,
   hlsearch = true,
   ignorecase = true,
   smartcase = true,
+  wrap = false,
   wrapscan = false,
   cursorline = true,
   backspace = 'indent,eol,start',
@@ -26,14 +28,15 @@ set_options {
   textwidth = 100,
   colorcolumn = '+1',
   smarttab = true,
-  expandtab = true,
-  tabstop = 4,
+  tabstop = 8,
+  softtabstop = 4,
   shiftwidth = 4,
-  mouse = 'a',
+  expandtab = true,
   splitright = true,
   splitbelow = true,
   undofile = true,
   autoindent = true,
+  swapfile = false,
   directory = '.',
   equalalways = true,
   switchbuf = 'useopen,usetab',
@@ -46,18 +49,8 @@ vim.cmd('colorscheme gruvbox')
 set_global_vars {
   mapleader = ' ',
   nvim_tree_width = 60,
-  ['sneak#label'] = 1,
-  ['sneak#use_ic_scs'] = 1,
-  bufferline = {
-    animation = false,
-    auto_hide = true,
-    closable = false,
-    icons = false,
-    maximum_padding = 1,
-    maximum_length = 40
-  },
-  fzf_preview_window = {'down:50%', 'ctrl-/'},
-  fzf_layout = { window = { width = 0.95, height = 0.9 } }
+  -- ['sneak#label'] = 1,
+  -- ['sneak#use_ic_scs'] = 1
 }
 
 if vim.fn.executable('rg') then
@@ -68,38 +61,27 @@ if vim.fn.executable('rg') then
   }
 end
 
- map {
-   n = {
-     ['<leader>ff']    = ':Files<CR>',
-     ['<leader>fG']    = ':Rg<CR>',
-     ['<leader>fb']    = ':Buffers<CR>',
-     ['<leader>f.']    = ':Dotfiles<CR>',
-     ['[h']            = ':GitGutterPrevHunk<CR>',
-     [']h']            = ':GitGutterNextHunk<CR>',
-     ['<leader>gg']    = ':Git<CR>',
-     ['<leader>gb']    = ':Git blame<CR>',
-     ['<leader>gl']    = ':Git log<CR>',
-     ['<C-s>']         = ':BufferPick<CR>',
-     ['<leader>bd']    = ':BufferClose<CR>',
-     ['<leader><Tab>'] = ':NvimTreeToggle<CR>',
-     ['-']             = ':NvimTreeFindFile<CR>',
-     ['<C-space>']     = ':set bufhidden=hide<CR>',
-     ['<leader>1']     = ':BufferGoto 1<CR>',
-     ['<leader>2']     = ':BufferGoto 2<CR>',
-     ['<leader>3']     = ':BufferGoto 3<CR>',
-     ['<leader>4']     = ':BufferGoto 4<CR>',
-     ['<leader>5']     = ':BufferGoto 5<CR>',
-     ['<leader>6']     = ':BufferGoto 6<CR>',
-     ['<leader>7']     = ':BufferGoto 7<CR>',
-     ['<leader>8']     = ':BufferGoto 8<CR>',
-     ['<leader>9']     = ':BufferGoto 9<CR>'
-   }
- }
- 
-map({ n = {
-  ['<LEADER>fF'] = ':Files ',
-  ['<leader>fg']    = ':Rg '
-}}, {silent = false})
+map { n = {
+    ['<Esc>']         = ':nohl<cr><Esc>',
+    ['<leader>ff']    = ':lua require"config.telescope".find_files()<cr>',
+    ['<leader>fF']    = ':lua require"config.telescope".find_files(true)<cr>',
+    ['<leader>fg']    = ':lua require"config.telescope".live_grep()<cr>',
+    ['<leader>fb']    = ':lua require"config.telescope".buffers()<cr>',
+    ['<leader>f.']    = ':lua require"config.telescope".find_dotfiles()<cr>',
+    ['<leader>st']    = ':terminal<cr>',
+    ['<leader>qc']    = ':read !gcolor3<cr>',
+    ['[h']            = ':GitGutterPrevHunk<cr>',
+    [']h']            = ':GitGutterNextHunk<cr>',
+    ['<leader>gg']    = ':Git<cr>',
+    ['<leader>gb']    = ':Git blame<cr>',
+    ['<leader>gl']    = ':Git log<cr>',
+    ['<leader>gd']    = ':Gdiffsplit<cr>',
+    ['<leader><Tab>'] = ':NvimTreeToggle<cr>',
+    ['-']             = ':NvimTreeFindFile<cr>',
+  },
+  i = {
+    ['<C-q>'] = '<C-r>=system("gcolor3")<cr>'
+  }
+}
 
 vim.cmd('autocmd TermOpen * setlocal nonumber')
-vim.cmd('autocmd BufReadPost * set bufhidden=delete')
