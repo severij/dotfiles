@@ -63,6 +63,8 @@ end
 
 map { n = {
     ['<Esc>']         = ':nohl<cr><Esc>',
+    ['gd']            = ':lua vim.lsp.buf.definition()<CR>',
+    ['gD']            = ':lua vim.lsp.buf.declaration()<CR>',
     ['<leader>ff']    = ':lua require"config.telescope".find_files()<cr>',
     ['<leader>fF']    = ':lua require"config.telescope".find_files(true)<cr>',
     ['<leader>fg']    = ':lua require"config.telescope".live_grep()<cr>',
@@ -80,8 +82,29 @@ map { n = {
     ['-']             = ':NvimTreeFindFile<cr>',
   },
   i = {
-    ['<C-q>'] = '<C-r>=system("gcolor3")<cr>'
+    ['<c-s>'] = '<c-o>:lua vim.lsp.buf.signature_help()<cr>',
+    ['<c-j>'] = '<c-o>:lua require"luasnip".expand_or_jump()<cr>',
+    ['<c-k>'] = {
+      { noremap = false, expr = true},
+      'luasnip#expand_or_jumpable() ? \'<cmd>lua require"luasnip".jump(-1)<cr>\' : "<c-k>"'
+    }
   }
 }
+
+--   inoremap <silent> <c-j> <cmd>lua require('luasnip').jump(-1)<CR>
+
+-- -- Mappings
+-- map {
+--   n = {
+--     ['[d'] = ':lua vim.lsp.diagnostic.goto_prev()<CR>',
+--     [']d'] = ':lua vim.lsp.diagnostic.goto_next()<CR>',
+--     ['<space><space>h'] = ':lua vim.lsp.buf.hover()<CR>',
+--     ['<space><space>t'] = ':lua vim.lsp.buf.type_definition()<CR>',
+--     ['<space><space>i'] = ':lua vim.lsp.buf.implementation()<CR>',
+--     ['<space><space>r'] = ':lua vim.lsp.buf.references()<CR>',
+--     ['<space><space>w'] = ':lua vim.lsp.buf.workspace_symbol()<CR>',
+--     ['<space><space>R'] = ':lua vim.lsp.buf.rename()<CR>'
+--   },
+-- }
 
 vim.cmd('autocmd TermOpen * setlocal nonumber')

@@ -25,6 +25,8 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
   use {'hrsh7th/nvim-cmp', config = require'config.cmp'}
+  use 'onsails/lspkind-nvim'
+  use {'windwp/nvim-autopairs', config = require'config.autopairs'}
   use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/plenary.nvim'}}}
   use {'nvim-treesitter/nvim-treesitter', branch = '0.5-compat'}
   use {'nvim-treesitter/nvim-treesitter-textobjects', branch = '0.5-compat', config = require'config.treesitter'}

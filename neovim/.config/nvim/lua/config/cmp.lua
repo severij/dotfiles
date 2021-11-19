@@ -8,8 +8,10 @@ cmp.setup({
     end,
   },
   mapping = {
-    ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+    ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(5), { 'i', 'c' }),
+    ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-5), { 'i', 'c' }),
+    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(10), { 'i', 'c' }),
+    ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-10), { 'i', 'c' }),
     ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
     ['<C-e>'] = cmp.mapping({
@@ -22,8 +24,14 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'luasnip' }
   }, {
-    { name = 'buffer' },
-  })
+    { name = 'buffer', keyword_length = 5 },
+  }),
+  formatting = {
+    format = require'lspkind'.cmp_format()
+  },
+  experimental = {
+    ghost_text = true
+  }
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).

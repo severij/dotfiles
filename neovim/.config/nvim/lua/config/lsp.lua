@@ -50,20 +50,3 @@ lspconfig.sumneko_lua.setup{
 }
 
 set_options { omnifunc = 'v:lua.vim.lsp.omnifunc' }
-
--- Mappings
-map {
-  n = {
-    ['[d'] = ':lua vim.lsp.diagnostic.goto_prev()<CR>',
-    [']d'] = ':lua vim.lsp.diagnostic.goto_next()<CR>',
-    ['<space><space>h'] = ':lua vim.lsp.buf.hover()<CR>',
-    ['<space><space>s'] = ':lua vim.lsp.buf.signature_help()<CR>',
-    ['<space><space>D'] = ':lua vim.lsp.buf.declaration()<CR>',
-    ['<space><space>d'] = ':lua vim.lsp.buf.definition()<CR>',
-    ['<space><space>t'] = ':lua vim.lsp.buf.type_definition()<CR>',
-    ['<space><space>i'] = ':lua vim.lsp.buf.implementation()<CR>',
-    ['<space><space>r'] = ':lua vim.lsp.buf.references()<CR>',
-    ['<space><space>w'] = ':lua vim.lsp.buf.workspace_symbol()<CR>',
-    ['<space><space>R'] = ':lua vim.lsp.buf.rename()<CR>'
-  }
-}
