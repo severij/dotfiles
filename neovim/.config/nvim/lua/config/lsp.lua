@@ -1,5 +1,9 @@
-local lspconfig = require'lspconfig'
-local capabilities = require'cmp_nvim_lsp'.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local succesful, lspconfig = pcall(require, 'lspconfig')
+if not succesful then return end
+
+local capabilities = require'cmp_nvim_lsp'.update_capabilities(
+  vim.lsp.protocol.make_client_capabilities()
+)
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {

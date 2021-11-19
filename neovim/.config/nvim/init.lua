@@ -44,7 +44,7 @@ set_options {
   background = 'dark'
 }
 
-vim.cmd('colorscheme gruvbox')
+pcall(vim.cmd, 'colorscheme gruvbox')
 
 set_global_vars {
   mapleader = ' ',

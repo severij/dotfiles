@@ -1,10 +1,5 @@
 homedir = os.getenv('HOME')
 
-function P(...)
-  local objects = vim.tbl_map(vim.inspect, {...})
-  print(unpack(objects))
-end
-
 function map(mappings, opts)
   local opts = opts or { noremap = true, silent = true}
   for mode,mode_mappings in pairs(mappings) do

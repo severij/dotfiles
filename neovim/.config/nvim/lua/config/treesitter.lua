@@ -1,3 +1,6 @@
+local succesful, treesitter_configs = pcall(require, 'nvim-treesitter.configs')
+if not succesful then return end
+
 require('nvim-treesitter.configs').setup {
   textobjects = {
     select = {

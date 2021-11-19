@@ -1,7 +1,9 @@
-local packer_path = vim.fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
+local fn = vim.fn
+local install_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 
-if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
-  vim.cmd('!git clone https://github.com/wbthomason/packer.nvim ' .. packer_path)
+-- Automatically install packer.nvim when it's not installed on a machine.
+if fn.empty(fn.glob(install_path)) > 0 then
+  vim.cmd('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
 end
 
 vim.cmd('packadd packer.nvim')
@@ -10,8 +12,6 @@ return require('packer').startup(function()
   use {'wbthomason/packer.nvim', opt = true}
   use {'neovim/nvim-lspconfig', config = require'config.lsp'}
   use 'kyazdani42/nvim-web-devicons'
-  use 'kyazdani42/nvim-tree.lua'
-  use 'ms-jpq/coq_nvim'
   use 'tpope/vim-commentary'
   use 'tpope/vim-sleuth'
   use 'tpope/vim-surround'

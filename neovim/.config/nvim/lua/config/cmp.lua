@@ -1,4 +1,5 @@
-local cmp = require'cmp'
+local succesful, cmp = pcall(require, 'cmp')
+if not succesful then return end
 
 cmp.setup({
   snippet = {
