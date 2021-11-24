@@ -1,5 +1,15 @@
 homedir = os.getenv('HOME')
 
+ask_directory = function()
+  local dir = vim.fn.input {
+    prompt = 'Enter a path to a directory: ',
+    completion = 'dir',
+    cancelreturn = '.'
+  }
+  if dir == '' then dir = '.' end
+  return dir
+end
+
 function map(mappings, opts)
   local opts = opts or { noremap = true, silent = true}
   for mode,mode_mappings in pairs(mappings) do

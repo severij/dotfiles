@@ -1,16 +1,33 @@
-local telescope = require'telescope'
+local succesful, telescope = pcall(require, 'telescope')
+if not succesful then return end
+
 local themes = require'telescope.themes'
 local builtin = require'telescope.builtin'
+local actions = require'telescope.actions'
+local action_set = require'telescope.actions.set'
+
+telescope.load_extension 'file_browser'
 
 telescope.setup {
   defaults = {
+    file_ignore_patterns = { '%.git' },
     vimgrep_arguments = {'rg', '-SHn', '--color=never', '--no-heading', '--column'}
   }
 }
 
+vim.api.nvim_exec([[
+augroup telescope
+    autocmd!
+    autocmd FileType TelescopePrompt inoremap <buffer> <silent> <C-r> <C-r>
+augroup END]], false)
+
+local overwrite_options = function(default_options, options)
+  return vim.tbl_extend('force', default_options, options)
+end
+
 local M = {}
 
-local opts = {
+local default_options = {
   layout_strategy = 'vertical',
   winblend = 15,
   layout_config = {
@@ -21,29 +38,22 @@ local opts = {
   }
 }
 
-M.find_files = function(find_within_dir)
-  local opts = opts
-  if find_within_dir then
-    opts.cwd = vim.fn.input {
-      prompt = 'Which directory? ',
-      completion = 'dir',
-      cancelreturn = '.'
-    }
-    if opts.cwd == '' then opts.cwd = '.' end
-  end
-  builtin.find_files(opts)
+M.find_files = function(options)
+  local options = options or {}
+  builtin.find_files(overwrite_options(default_options, options))
 end
 
-M.live_grep = function()
-  builtin.live_grep(opts)
+M.live_grep = function(options)
+  local options = options or {}
+  builtin.live_grep(overwrite_options(default_options, options))
 end
 
 M.buffers = function()
-  builtin.buffers(opts)
+  builtin.buffers(default_options)
 end
 
 M.find_dotfiles = function()
-  builtin.find_files(vim.tbl_extend('force', opts, {
+  builtin.find_files(overwrite_options(default_options, {
     hidden = true,
     cwd = vim.fn.fnamemodify(
       vim.fn.system('readlink -f ~/.config/nvim/init.lua'),

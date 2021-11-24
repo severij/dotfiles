@@ -11,6 +11,7 @@ vim.cmd('packadd packer.nvim')
 return require('packer').startup(function()
   use {'wbthomason/packer.nvim', opt = true}
   use {'neovim/nvim-lspconfig', config = require'config.lsp'}
+  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
   use 'kyazdani42/nvim-web-devicons'
   use 'tpope/vim-commentary'
   use 'tpope/vim-sleuth'
@@ -19,6 +20,11 @@ return require('packer').startup(function()
   use 'tpope/vim-fugitive'
   use 'wellle/targets.vim'
   use 'morhetz/gruvbox'
+  use {
+    'lewis6991/gitsigns.nvim',
+    requires = {'nvim-lua/plenary.nvim'},
+    config = require'config.gitsigns'
+  }
   use 'L3MON4D3/LuaSnip'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
@@ -27,7 +33,6 @@ return require('packer').startup(function()
   use {'hrsh7th/nvim-cmp', config = require'config.cmp'}
   use 'onsails/lspkind-nvim'
   use {'windwp/nvim-autopairs', config = require'config.autopairs'}
-  use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/plenary.nvim'}}}
-  use {'nvim-treesitter/nvim-treesitter', branch = '0.5-compat'}
-  use {'nvim-treesitter/nvim-treesitter-textobjects', branch = '0.5-compat', config = require'config.treesitter'}
+  use {'nvim-telescope/telescope.nvim', requires = {'nvim-lua/plenary.nvim'}}
+  use 'nvim-telescope/telescope-file-browser.nvim'
 end)

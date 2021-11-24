@@ -47,10 +47,7 @@ set_options {
 pcall(vim.cmd, 'colorscheme gruvbox')
 
 set_global_vars {
-  mapleader = ' ',
-  nvim_tree_width = 60,
-  -- ['sneak#label'] = 1,
-  -- ['sneak#use_ic_scs'] = 1
+  mapleader = ' '
 }
 
 if vim.fn.executable('rg') then
@@ -61,25 +58,38 @@ if vim.fn.executable('rg') then
   }
 end
 
-map { n = {
-    ['<Esc>']         = ':nohl<cr><Esc>',
-    ['gd']            = ':lua vim.lsp.buf.definition()<CR>',
-    ['gD']            = ':lua vim.lsp.buf.declaration()<CR>',
-    ['<leader>ff']    = ':lua require"config.telescope".find_files()<cr>',
-    ['<leader>fF']    = ':lua require"config.telescope".find_files(true)<cr>',
-    ['<leader>fg']    = ':lua require"config.telescope".live_grep()<cr>',
-    ['<leader>fb']    = ':lua require"config.telescope".buffers()<cr>',
-    ['<leader>f.']    = ':lua require"config.telescope".find_dotfiles()<cr>',
-    ['<leader>st']    = ':terminal<cr>',
-    ['<leader>qc']    = ':read !gcolor3<cr>',
-    ['[h']            = ':GitGutterPrevHunk<cr>',
-    [']h']            = ':GitGutterNextHunk<cr>',
-    ['<leader>gg']    = ':Git<cr>',
-    ['<leader>gb']    = ':Git blame<cr>',
-    ['<leader>gl']    = ':Git log<cr>',
-    ['<leader>gd']    = ':Gdiffsplit<cr>',
-    ['<leader><Tab>'] = ':NvimTreeToggle<cr>',
-    ['-']             = ':NvimTreeFindFile<cr>',
+map {
+  n = {
+    ['<Esc>']      = ':nohl<cr><Esc>',
+    ['<leader>bb'] = ':lua require"config.telescope".buffers()<cr>',
+    ['<leader>bd'] = ':confirm bd<cr>',
+    ['<leader>fb'] = ':lua require"telescope".extensions.file_browser.file_browser()<cr>',
+    ['<leader>ff'] = ':lua require"config.telescope".find_files()<cr>',
+    ['<leader>fF'] = ':lua require"config.telescope".find_files{ cwd = ask_directory() }<cr>',
+    ['<leader>fg'] = ':lua require"config.telescope".live_grep()<cr>',
+    ['<leader>fG'] = ':lua require"config.telescope".live_grep{ cwd = ask_directory() }<cr>',
+    ['<leader>f.'] = ':lua require"config.telescope".find_dotfiles()<cr>',
+    ['<leader>gg'] = ':Git<cr>',
+    ['<leader>gb'] = ':Git blame<cr>',
+    ['<leader>gl'] = ':Git log<cr>',
+    ['<leader>gB'] = ':lua require"telescope.builtin".git_branches()<cr>',
+    ['<leader>gs'] = ':lua require"telescope.builtin".git_status()<cr>',
+    ['[h']         = ':lua require"gitsigns.actions".prev_hunk()<cr>',
+    [']h']         = ':lua require"gitsigns.actions".next_hunk()<cr>',
+    ['<leader>hb'] = ':lua require"gitsigns".blame_line { full = true }<cr>',
+    ['<leader>hs'] = ':lua require"gitsigns".stage_hunk()<cr>',
+    ['<leader>hu'] = ':lua require"gitsigns".undo_stage_hunk()<cr>',
+    ['<leader>hp'] = ':lua require"gitsigns".preview_hunk()<cr>',
+    ['[d']         = ':lua vim.lsp.diagnostic.goto_prev()<cr>',
+    [']d']         = ':lua vim.lsp.diagnostic.goto_next()<cr>',
+    gd             = ':lua vim.lsp.buf.definition()<cr>',
+    gD             = ':lua vim.lsp.buf.declaration()<cr>',
+    gI             = ':lua vim.lsp.buf.implementation()<CR>',
+    gT             = ':lua vim.lsp.buf.type_definition()<CR>',
+    gr             = ':lua vim.lsp.buf.references()<CR>',
+    ['<leader>rr'] = ':lua vim.lsp.buf.rename()<CR>',
+    ['<ctrl-h>']   = ':lua vim.lsp.buf.hover()<cr>',
+    ['<leader>w']  = ':lua vim.lsp.buf.workspace_symbol()<CR>'
   },
   i = {
     ['<c-s>'] = '<c-o>:lua vim.lsp.buf.signature_help()<cr>',
@@ -91,20 +101,4 @@ map { n = {
   }
 }
 
---   inoremap <silent> <c-j> <cmd>lua require('luasnip').jump(-1)<CR>
-
--- -- Mappings
--- map {
---   n = {
---     ['[d'] = ':lua vim.lsp.diagnostic.goto_prev()<CR>',
---     [']d'] = ':lua vim.lsp.diagnostic.goto_next()<CR>',
---     ['<space><space>h'] = ':lua vim.lsp.buf.hover()<CR>',
---     ['<space><space>t'] = ':lua vim.lsp.buf.type_definition()<CR>',
---     ['<space><space>i'] = ':lua vim.lsp.buf.implementation()<CR>',
---     ['<space><space>r'] = ':lua vim.lsp.buf.references()<CR>',
---     ['<space><space>w'] = ':lua vim.lsp.buf.workspace_symbol()<CR>',
---     ['<space><space>R'] = ':lua vim.lsp.buf.rename()<CR>'
---   },
--- }
-
-vim.cmd('autocmd TermOpen * setlocal nonumber')
+vim.cmd('autocmd TermOpen * setlocal nonumber norelativenumber')
