@@ -21,8 +21,6 @@ set_options {
   lazyredraw = true,
   history = 1000,
   termguicolors = true,
-  pumblend = 15,
-  winblend = 15,
   inccommand = 'split',
   showmatch = true,
   textwidth = 100,
@@ -44,7 +42,7 @@ set_options {
   background = 'dark'
 }
 
-pcall(vim.cmd, 'colorscheme gruvbox')
+pcall(vim.cmd, 'colorscheme dogrun')
 
 set_global_vars {
   mapleader = ' '
@@ -60,36 +58,40 @@ end
 
 map {
   n = {
-    ['<Esc>']      = ':nohl<cr><Esc>',
-    ['<leader>bb'] = ':lua require"config.telescope".buffers()<cr>',
-    ['<leader>bd'] = ':confirm bd<cr>',
-    ['<leader>fb'] = ':lua require"telescope".extensions.file_browser.file_browser()<cr>',
-    ['<leader>ff'] = ':lua require"config.telescope".find_files()<cr>',
-    ['<leader>fF'] = ':lua require"config.telescope".find_files{ cwd = ask_directory() }<cr>',
-    ['<leader>fg'] = ':lua require"config.telescope".live_grep()<cr>',
-    ['<leader>fG'] = ':lua require"config.telescope".live_grep{ cwd = ask_directory() }<cr>',
-    ['<leader>f.'] = ':lua require"config.telescope".find_dotfiles()<cr>',
-    ['<leader>gg'] = ':Git<cr>',
-    ['<leader>gb'] = ':Git blame<cr>',
-    ['<leader>gl'] = ':Git log<cr>',
-    ['<leader>gB'] = ':lua require"telescope.builtin".git_branches()<cr>',
-    ['<leader>gs'] = ':lua require"telescope.builtin".git_status()<cr>',
-    ['[h']         = ':lua require"gitsigns.actions".prev_hunk()<cr>',
-    [']h']         = ':lua require"gitsigns.actions".next_hunk()<cr>',
-    ['<leader>hb'] = ':lua require"gitsigns".blame_line { full = true }<cr>',
-    ['<leader>hs'] = ':lua require"gitsigns".stage_hunk()<cr>',
-    ['<leader>hu'] = ':lua require"gitsigns".undo_stage_hunk()<cr>',
-    ['<leader>hp'] = ':lua require"gitsigns".preview_hunk()<cr>',
-    ['[d']         = ':lua vim.lsp.diagnostic.goto_prev()<cr>',
-    [']d']         = ':lua vim.lsp.diagnostic.goto_next()<cr>',
-    gd             = ':lua vim.lsp.buf.definition()<cr>',
-    gD             = ':lua vim.lsp.buf.declaration()<cr>',
-    gI             = ':lua vim.lsp.buf.implementation()<CR>',
-    gT             = ':lua vim.lsp.buf.type_definition()<CR>',
-    gr             = ':lua vim.lsp.buf.references()<CR>',
-    ['<leader>rr'] = ':lua vim.lsp.buf.rename()<CR>',
-    ['<ctrl-h>']   = ':lua vim.lsp.buf.hover()<cr>',
-    ['<leader>w']  = ':lua vim.lsp.buf.workspace_symbol()<CR>'
+    ['<Esc>']         = ':nohl<cr><Esc>',
+    ['<leader>bb']    = ':lua require"config.telescope".buffers()<cr>',
+    ['<leader>bd']    = ':confirm bd<cr>',
+    ['<leader>fb']    = ':lua require"telescope".extensions.file_browser.file_browser()<cr>',
+    ['<leader>fr']    = ':lua require"config.telescope".oldfiles()<cr>',
+    ['<leader>ff']    = ':lua require"config.telescope".find_files()<cr>',
+    ['<leader>fF']    = ':lua require"config.telescope".find_files{ cwd = ask_directory() }<cr>',
+    ['<leader>fg']    = ':lua require"config.telescope".live_grep()<cr>',
+    ['<leader>fG']    = ':lua require"config.telescope".live_grep{ cwd = ask_directory() }<cr>',
+    ['<leader>f.']    = ':lua require"config.telescope".find_dotfiles()<cr>',
+    ['<leader>gg']    = ':Git<cr>',
+    ['<leader>gb']    = ':Git blame<cr>',
+    ['<leader>gl']    = ':Git log<cr>',
+    ['<leader>gB']    = ':lua require"telescope.builtin".git_branches()<cr>',
+    ['<leader>gs']    = ':lua require"telescope.builtin".git_status()<cr>',
+    ['[h']            = ':lua require"gitsigns.actions".prev_hunk()<cr>',
+    [']h']            = ':lua require"gitsigns.actions".next_hunk()<cr>',
+    ['<leader>hh']    = ':Telescope highlights<cr>',
+    ['<leader>hb']    = ':lua require"gitsigns".blame_line { full = true }<cr>',
+    ['<leader>hs']    = ':lua require"gitsigns".stage_hunk()<cr>',
+    ['<leader>hu']    = ':lua require"gitsigns".undo_stage_hunk()<cr>',
+    ['<leader>hp']    = ':lua require"gitsigns".preview_hunk()<cr>',
+    ['[d']            = ':lua vim.lsp.diagnostic.goto_prev()<cr>',
+    [']d']            = ':lua vim.lsp.diagnostic.goto_next()<cr>',
+    gd                = ':lua vim.lsp.buf.definition()<cr>',
+    gD                = ':lua vim.lsp.buf.declaration()<cr>',
+    gI                = ':lua vim.lsp.buf.implementation()<CR>',
+    gT                = ':lua vim.lsp.buf.type_definition()<CR>',
+    gr                = ':lua vim.lsp.buf.references()<CR>',
+    ['<leader>rr']    = ':lua vim.lsp.buf.rename()<CR>',
+    ['<ctrl-h>']      = ':lua vim.lsp.buf.hover()<cr>',
+    ['<leader>w']     = ':lua vim.lsp.buf.workspace_symbol()<CR>',
+    ['<leader><tab>'] = ':NvimTreeToggle<CR>',
+    ['-']             = ':NvimTreeFindFileToggle<CR>'
   },
   i = {
     ['<c-s>'] = '<c-o>:lua vim.lsp.buf.signature_help()<cr>',

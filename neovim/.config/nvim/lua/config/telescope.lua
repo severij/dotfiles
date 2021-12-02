@@ -29,18 +29,22 @@ local M = {}
 
 local default_options = {
   layout_strategy = 'vertical',
-  winblend = 15,
   layout_config = {
     prompt_position = 'bottom',
     width = 0.85,
     height = 0.99,
-    preview_cutoff = 25 
+    preview_cutoff = 25
   }
 }
 
 M.find_files = function(options)
   local options = options or {}
   builtin.find_files(overwrite_options(default_options, options))
+end
+
+M.oldfiles = function(options)
+  local options = options or {}
+  builtin.oldfiles(overwrite_options(default_options, options))
 end
 
 M.live_grep = function(options)
