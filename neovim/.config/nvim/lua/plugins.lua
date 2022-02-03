@@ -42,5 +42,5 @@ return require('packer').startup(function()
   use 'onsails/lspkind-nvim'
   use {'windwp/nvim-autopairs', config = require'config.autopairs'}
   use {'nvim-telescope/telescope.nvim', requires = {'nvim-lua/plenary.nvim'}}
-  use 'nvim-telescope/telescope-file-browser.nvim'
+  use 'famiu/bufdelete.nvim'
 end)
