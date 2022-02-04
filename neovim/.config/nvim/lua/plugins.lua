@@ -16,10 +16,10 @@ return require('packer').startup(function()
     run = ':TSUpdate',
     config = require'config.treesitter'
   }
-  use {'kyazdani42/nvim-tree.lua',
-    requires = { 'kyazdani42/nvim-web-devicons' },
-    config = require'config.nvim-tree'
-  }
+  -- use {'kyazdani42/nvim-tree.lua',
+  --   requires = { 'kyazdani42/nvim-web-devicons' },
+  --   config = require'config.nvim-tree'
+  -- }
   use 'tjdevries/colorbuddy.nvim'
   use 'tpope/vim-commentary'
   use 'tpope/vim-sleuth'
@@ -41,6 +41,10 @@ return require('packer').startup(function()
   use {'hrsh7th/nvim-cmp', config = require'config.cmp'}
   use 'onsails/lspkind-nvim'
   use {'windwp/nvim-autopairs', config = require'config.autopairs'}
-  use {'nvim-telescope/telescope.nvim', requires = {'nvim-lua/plenary.nvim'}}
+  use {'nvim-telescope/telescope.nvim',
+    requires = {'nvim-lua/plenary.nvim'},
+    config = require'config.telescope'
+  }
+  use { "nvim-telescope/telescope-file-browser.nvim" }
   use 'famiu/bufdelete.nvim'
 end)

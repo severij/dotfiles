@@ -6,8 +6,6 @@ local builtin = require'telescope.builtin'
 local actions = require'telescope.actions'
 local action_set = require'telescope.actions.set'
 
--- telescope.load_extension 'file_browser'
-
 telescope.setup {
   defaults = {
     file_ignore_patterns = { '%.git' },
@@ -19,8 +17,15 @@ telescope.setup {
       height = 0.99,
       preview_cutoff = 25
     }
+  },
+  extensions = {
+    file_browser = {
+      layout_strategy = 'horizontal',
+    }
   }
 }
+
+telescope.load_extension 'file_browser'
 
 vim.api.nvim_exec([[
 augroup telescope
