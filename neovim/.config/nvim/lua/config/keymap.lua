@@ -14,6 +14,8 @@ map('n', '<Leader>fF', ':lua require"telescope.builtin".find_files{ cwd = "./" }
 map('n', '<Leader>fg', '<Cmd>Telescope live_grep<CR>')
 map('n', '<Leader>fb', '<Cmd>Telescope file_browser<CR>')
 map('n', '-', '<Cmd>Telescope file_browser cwd=%:p:h<CR>')
+map('n', '<Leader>fh', '<Cmd>Telescope help_tags<CR>')
+map('n', '<Leader>f/', '<Cmd>Telescope search_history<CR>')
 map('n', '<Leader>f.', function () require"config.telescope".find_dotfiles() end)
 map('n', '<Leader>gg', '<Cmd>Git<CR>')
 map('n', '<Leader>gb', '<Cmd>Git blame<CR>')
