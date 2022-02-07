@@ -45,6 +45,6 @@ return require('packer').startup(function()
     requires = {'nvim-lua/plenary.nvim'},
     config = require'config.telescope'
   }
-  use { "nvim-telescope/telescope-file-browser.nvim" }
+  use { "severij/telescope-file-browser.nvim" }
   use 'famiu/bufdelete.nvim'
 end)
