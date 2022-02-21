@@ -49,4 +49,15 @@ lspconfig.sumneko_lua.setup{
   }
 }
 
+vim.keymap.set('n', '[d', vim.lsp.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.lsp.diagnostic.goto_next)
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
+vim.keymap.set('n', 'gI', vim.lsp.buf.implementation)
+vim.keymap.set('n', 'gT', vim.lsp.buf.type_definition)
+vim.keymap.set('n', 'gr', vim.lsp.buf.references)
+vim.keymap.set('n', '<Leader>rr', vim.lsp.buf.rename)
+vim.keymap.set('n', '<Ctrl-h>', vim.lsp.buf.hover)
+vim.keymap.set('n', '<Leader>w', vim.lsp.buf.workspace_symbol)
+
 set_options { omnifunc = 'v:lua.vim.lsp.omnifunc' }

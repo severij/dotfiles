@@ -43,7 +43,8 @@ set_options {
   background = 'dark'
 }
 
-pcall(vim.cmd, 'colorscheme dogrun')
+vim.g.seoul256_background = 235
+pcall(vim.cmd, 'colorscheme seoul256')
 
 if vim.fn.executable('rg') then
   local rg_cmd = 'rg --vimgrep'
@@ -52,6 +53,5 @@ if vim.fn.executable('rg') then
     grepformat = '%f:%l:%c:%m'
   }
 end
-
 
 vim.cmd 'autocmd TermOpen * setlocal nonumber norelativenumber'

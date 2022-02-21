@@ -16,10 +16,7 @@ return require('packer').startup(function()
     run = ':TSUpdate',
     config = require'config.treesitter'
   }
-  -- use {'kyazdani42/nvim-tree.lua',
-  --   requires = { 'kyazdani42/nvim-web-devicons' },
-  --   config = require'config.nvim-tree'
-  -- }
+  use 'kyazdani42/nvim-web-devicons'
   use 'tjdevries/colorbuddy.nvim'
   use 'tpope/vim-commentary'
   use 'tpope/vim-sleuth'
@@ -27,14 +24,15 @@ return require('packer').startup(function()
   use 'tpope/vim-unimpaired'
   use 'tpope/vim-fugitive'
   use 'wellle/targets.vim'
-  use 'wadackel/vim-dogrun'
+  use 'junegunn/seoul256.vim'
   use {
     'lewis6991/gitsigns.nvim',
     requires = {'nvim-lua/plenary.nvim'},
     config = require'config.gitsigns'
   }
-  use 'L3MON4D3/LuaSnip'
+  use { 'L3MON4D3/LuaSnip', config = require'config.luasnip' }
   use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-nvim-lua'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
@@ -47,4 +45,5 @@ return require('packer').startup(function()
   }
   use { "severij/telescope-file-browser.nvim" }
   use 'famiu/bufdelete.nvim'
+  use { "beauwilliams/focus.nvim", config = require("focus").setup() }
 end)
