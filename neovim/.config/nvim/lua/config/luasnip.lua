@@ -1,20 +1,22 @@
-local succesful, ls = pcall(require, 'luasnip')
-if not succesful then return end
+local load_succesful, luasnip = pcall(require, 'luasnip')
 
-ls.config.set_config {
-  history = true,
-  updateevents = 'TextChanged,TextChangedI',
-  enable_autosnippets = true
-}
+-- In case LuaSnip isn't installed yet:
+if not load_succesful then return end
 
-vim.keymap.set({'i', 's'}, '<C-j>', function ()
-  if ls.expand_or_jumpable() then
-    ls.expand_or_jump()
-  end
-end, { silent = true })
+-- Keymaps
 
-vim.keymap.set({'i', 's'}, '<C-k>', function ()
-  if ls.jumpable(-1) then
-    ls.jump(-1)
-  end
-end, { silent = true })
+vim.keymap.set('i', '<Tab>', function()
+  return luasnip.expand_or_jumpable() and '<Plug>luasnip-expand-or-jump' or '<Tab>'
+end, { silent = true, expr = true })
+
+vim.keymap.set('i', '<C-j>', function()
+  return luasnip.choice_active() and '<Plug>luasnip-next-choice' or '<C-j>'
+end, { silent = true, expr = true })
+
+vim.keymap.set('i', '<C-k>', function()
+  return luasnip.choice_active() and '<Plug>luasnip-prev-choice' or '<C-k>'
+end, { silent = true, expr = true })
+
+-- Load the snippets
+require'luasnip.loaders.from_lua'.load { paths = { '~/.config/nvim/lua/snippets' }}
+
