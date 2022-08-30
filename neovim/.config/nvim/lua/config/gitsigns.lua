@@ -11,6 +11,10 @@ gitsigns.setup {
   },
   on_attach = function(bufnr)
     vim.keymap.set('n', '<Leader>gb', gitsigns.blame_line)
+    vim.keymap.set('n', '<Leader>gs', gitsigns.stage_hunk)
+    vim.keymap.set('n', '<Leader>gu', gitsigns.reset_hunk)
     vim.keymap.set('n', '<Leader>tb', gitsigns.toggle_current_line_blame)
+    vim.keymap.set('n', '[h', gitsigns.prev_hunk)
+    vim.keymap.set('n', ']h', gitsigns.next_hunk)
   end
 }
