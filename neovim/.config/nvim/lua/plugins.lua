@@ -17,6 +17,8 @@ return packer.startup(function ()
   use {'L3MON4D3/LuaSnip', config = require'config.luasnip'}
   use {'numToStr/Comment.nvim', config = require'config.Comment'}
   use 'famiu/bufdelete.nvim'
+  use 'nvim-treesitter/nvim-treesitter'
+  use 'nvim-treesitter/playground'
 
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
@@ -45,8 +47,9 @@ return packer.startup(function ()
   }
   use 'sainnhe/everforest'
   use "lukas-reineke/indent-blankline.nvim"
-  use { "windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup {} end }
   use { 'TimUntersberger/neogit', config = require'config.neogit' }
   use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim', config = require'config.diffview' }
   use { 'lewis6991/gitsigns.nvim', config = require'config.gitsigns' }
+  use 'Olical/conjure'
+  use 'https://github.com/mg979/vim-visual-multi'
 end)
