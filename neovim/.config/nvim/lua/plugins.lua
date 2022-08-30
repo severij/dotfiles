@@ -16,6 +16,7 @@ return packer.startup(function ()
   use {'neovim/nvim-lspconfig', config = require'config.lsp'}
   use {'L3MON4D3/LuaSnip', config = require'config.luasnip'}
   use {'numToStr/Comment.nvim', config = require'config.Comment'}
+  use 'famiu/bufdelete.nvim'
 
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
