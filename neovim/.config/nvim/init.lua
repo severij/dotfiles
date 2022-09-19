@@ -7,6 +7,7 @@ vim.opt.termguicolors = true
 vim.opt.laststatus = 3
 vim.opt.number = true
 vim.opt.wrap = false
+vim.opt.wrapscan = false
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 vim.opt.ignorecase = true
