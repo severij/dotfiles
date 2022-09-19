@@ -6,7 +6,8 @@ if not load_successful then return end
 nvim_tree.setup {
   view = {
     adaptive_size = true
-  }
+  },
+  sync_root_with_cwd = true
 }
 
 -- Keymaps
