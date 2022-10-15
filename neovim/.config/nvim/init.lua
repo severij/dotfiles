@@ -3,24 +3,31 @@ vim.g.maplocalleader = '\\'
 
 require'plugins'
 
-vim.opt.termguicolors = true
-vim.opt.laststatus = 3
-vim.opt.number = true
-vim.opt.wrap = false
-vim.opt.wrapscan = false
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 4
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.cursorline = true
-vim.opt.showmatch = true
-vim.opt.splitright = true
-vim.opt.splitbelow = true
-vim.opt.mouse = 'a'
-vim.opt.undofile = true
-vim.opt.directory = '.'
-vim.opt.confirm = true
-vim.opt.background = 'dark'
+local options = {
+  termguicolors = true,
+  laststatus = 3,
+  number = true,
+  wrap = false,
+  wrapscan = false,
+  expandtab = true,
+  shiftwidth = 4,
+  ignorecase = true,
+  smartcase = true,
+  cursorline = true,
+  showmatch = true,
+  splitright = true,
+  splitbelow = true,
+  mouse = 'a',
+  undofile = true,
+  directory = '.',
+  confirm = true,
+  background = 'dark',
+  winbar = '%f'
+}
+
+for option, value in pairs(options) do
+  vim.opt[option] = value
+end
 
 vim.keymap.set('n', '<Esc>', '<Cmd>nohl<CR><Esc>') -- Clear the search highlighting whenever <Esc> is pressed.                           
 vim.keymap.set('n', '<C-c>', '<Cmd>Bwipeout<CR>')  -- Wipeout a buffer.
