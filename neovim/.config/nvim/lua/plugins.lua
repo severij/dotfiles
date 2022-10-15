@@ -14,11 +14,11 @@ return packer.startup(function ()
   use {'wbthomason/packer.nvim', config = require'config.packer'}
 
   use {'neovim/nvim-lspconfig', config = require'config.lsp'}
+  use {'nvim-treesitter/nvim-treesitter', run = function() vim.cmd 'TSUpdate' end}
   use {'L3MON4D3/LuaSnip', config = require'config.luasnip'}
   use {'numToStr/Comment.nvim', config = require'config.Comment'}
   use 'famiu/bufdelete.nvim'
   use 'nvim-treesitter/nvim-treesitter'
-  use 'nvim-treesitter/playground'
 
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
@@ -51,5 +51,4 @@ return packer.startup(function ()
   use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim', config = require'config.diffview' }
   use { 'lewis6991/gitsigns.nvim', config = require'config.gitsigns' }
   use 'Olical/conjure'
-  use 'https://github.com/mg979/vim-visual-multi'
 end)
