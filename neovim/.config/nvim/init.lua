@@ -22,7 +22,8 @@ local options = {
   undofile = true,
   confirm = true,
   background = 'dark',
-  winbar = '%f'
+  winbar = '%f',
+  jumpoptions = 'stack'
 }
 
 for option, value in pairs(options) do
@@ -31,6 +32,12 @@ end
 
 vim.keymap.set('n', '<Esc>', '<Cmd>nohl<CR><Esc>') -- Clear the search highlighting whenever <Esc> is pressed.                           
 vim.keymap.set('n', '<C-c>', '<Cmd>Bwipeout<CR>')  -- Wipeout a buffer.
+
+-- Do not pollute the jumplist
+vim.keymap.set('n', 'n', "<cmd>keepj norm! n<CR>m'<C-o>``", { noremap = true})
+vim.keymap.set('n', 'N', "<cmd>keepj norm! N<CR>m'<C-o>``", { noremap = true})
+vim.keymap.set('n', '}', "<cmd>keepj norm! }<CR>m'<C-o>``", { noremap = true})
+vim.keymap.set('n', '{', "<cmd>keepj norm! {<CR>m'<C-o>``", { noremap = true})
 
 vim.cmd 'highlight WinSeparator guibg=None'
 vim.cmd 'colorscheme everforest'
