@@ -37,5 +37,5 @@ vim.keymap.set('x', '<C-j>', ":m'>+<CR>gv=gv") -- Move selected lines upwards an
 vim.keymap.set('x', '<C-k>', ":m-2<CR>gv=gv")  -- Move selected lines downwards and format them.
 
 vim.cmd 'highlight WinSeparator guibg=None'
-
 vim.cmd 'colorscheme everforest'
+vim.cmd 'autocmd TermOpen * setlocal nonumber norelativenumber | startinsert'
