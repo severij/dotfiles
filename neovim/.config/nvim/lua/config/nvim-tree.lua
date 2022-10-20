@@ -10,7 +10,15 @@ nvim_tree.setup {
   sync_root_with_cwd = true
 }
 
+local api = require('nvim-tree.api')
+
 -- Keymaps
 vim.keymap.set('n', '<F1>', '<Cmd>NvimTreeToggle<CR>')
-vim.keymap.set('n', '-', '<Cmd>NvimTreeFindFile<CR>')
+vim.keymap.set('n', '-', function()
+  if vim.api.nvim_buf_get_name(0) then
+    api.tree.toggle(true)
+  else
+    api.tree.open(vim.fn.getcwd())
+  end
+end)
 

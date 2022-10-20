@@ -35,6 +35,8 @@ lspconfig.sumneko_lua.setup {
   },
 }
 
+lspconfig.pylsp.setup{}
+
 lspconfig.clojure_lsp.setup{}
 
 lspconfig.rust_analyzer.setup {
