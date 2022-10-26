@@ -19,7 +19,6 @@ local options = {
   splitbelow = true,
   mouse = 'a',
   undofile = true,
-  directory = '.',
   confirm = true,
   background = 'dark',
   winbar = '%f'
