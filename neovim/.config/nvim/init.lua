@@ -2,6 +2,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
 
 require'plugins'
+require'config.quickfix'
 
 local options = {
   termguicolors = true,
