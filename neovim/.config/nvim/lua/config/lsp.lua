@@ -1,7 +1,13 @@
-local load_successful, lspconfig = pcall(require, 'lspconfig')
+local lspconfig_loaded, lspconfig = pcall(require, 'lspconfig')
+local mason_loaded, mason = pcall(require, 'mason')
+local mason_lspconfig_loaded, mason_lspconfig = pcall(require, 'mason-lspconfig')
 
--- In case nvim-lspconfig isn't installed yet:
-if not load_successful then return end
+if not (lspconfig_loaded and mason_loaded and mason_lspconfig_loaded) then
+  return
+end
+
+mason.setup()
+mason_lspconfig.setup()
 
 -- Keymaps
 local opts = { noremap = true, silent = true }

@@ -12,13 +12,14 @@ local use = packer.use
 
 return packer.startup(function ()
   use {'wbthomason/packer.nvim', config = require'config.packer'}
-
-  use {'neovim/nvim-lspconfig', config = require'config.lsp'}
-  use {'nvim-treesitter/nvim-treesitter', run = function() vim.cmd 'TSUpdate' end}
+  use {
+    'williamboman/mason-lspconfig.nvim',
+    requires = {'williamboman/mason.nvim', 'neovim/nvim-lspconfig'},
+    config = require'config.lsp'
+  }
   use {'L3MON4D3/LuaSnip', config = require'config.luasnip'}
   use {'numToStr/Comment.nvim', config = require'config.Comment'}
   use 'famiu/bufdelete.nvim'
-  use 'nvim-treesitter/nvim-treesitter'
 
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
