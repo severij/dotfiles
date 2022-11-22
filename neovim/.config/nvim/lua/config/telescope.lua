@@ -1,15 +1,10 @@
-local load_successful, telescope = pcall(require, 'telescope')
-
--- In case telescope isn't installed yet:
-if not load_successful then return end
-
-local builtin = require'telescope.builtin'
-
-telescope.setup {
+require'telescope'.setup {
   defaults = {
     file_ignore_patterns = { '%.git' }
   }
 }
+
+local builtin = require'telescope.builtin'
 
 local function find_dotfiles()
   builtin.find_files {
@@ -22,10 +17,10 @@ local function find_dotfiles()
   }
 end
 
-
 vim.keymap.set('n', '<Leader>ff', builtin.find_files)
 vim.keymap.set('n', '<Leader>fg', builtin.live_grep)
 vim.keymap.set('n', '<Leader>fb', builtin.buffers)
 vim.keymap.set('n', '<Leader>fr', builtin.oldfiles)
 vim.keymap.set('n', '<Leader>fc', builtin.commands)
 vim.keymap.set('n', '<Leader>f.', find_dotfiles)
+vim.keymap.set('n', '<Leader>fh', builtin.help_tags)

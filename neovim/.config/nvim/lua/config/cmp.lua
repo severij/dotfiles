@@ -1,7 +1,4 @@
-local load_successful, cmp = pcall(require, 'cmp')
-
--- In case nvim-cmp isn't installed yet:
-if not load_successful then return end
+local cmp = require'cmp'
 
 cmp.setup {
   snippet = {

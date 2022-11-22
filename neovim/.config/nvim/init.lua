@@ -40,5 +40,4 @@ vim.keymap.set('n', '}', "<cmd>keepj norm! }<CR>m'<C-o>``", { noremap = true})
 vim.keymap.set('n', '{', "<cmd>keepj norm! {<CR>m'<C-o>``", { noremap = true})
 
 vim.cmd 'highlight WinSeparator guibg=None'
-vim.cmd 'colorscheme everforest'
 vim.cmd 'autocmd TermOpen * setlocal nonumber norelativenumber | startinsert'

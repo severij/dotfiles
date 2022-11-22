@@ -1,7 +1,4 @@
-local load_succesful, luasnip = pcall(require, 'luasnip')
-
--- In case LuaSnip isn't installed yet:
-if not load_succesful then return end
+local luasnip = require'luasnip'
 
 luasnip.setup({
   region_check_events = "CursorHold,InsertLeave,InsertEnter",

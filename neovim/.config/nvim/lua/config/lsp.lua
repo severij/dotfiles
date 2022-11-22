@@ -1,13 +1,7 @@
-local lspconfig_loaded, lspconfig = pcall(require, 'lspconfig')
-local mason_loaded, mason = pcall(require, 'mason')
-local mason_lspconfig_loaded, mason_lspconfig = pcall(require, 'mason-lspconfig')
+require'mason'.setup()
+require'mason-lspconfig'.setup()
 
-if not (lspconfig_loaded and mason_loaded and mason_lspconfig_loaded) then
-  return
-end
-
-mason.setup()
-mason_lspconfig.setup()
+local lspconfig = require'lspconfig'
 
 -- Keymaps
 local opts = { noremap = true, silent = true }
@@ -30,7 +24,6 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 
 lspconfig.sumneko_lua.setup {
-  capabilities = require'cmp_nvim_lsp'.update_capabilities(vim.lsp.protocol.make_client_capabilities()),
   settings = {
     Lua = {
       runtime = { version = 'LuaJIT' },
@@ -45,8 +38,6 @@ lspconfig.pylsp.setup{}
 
 lspconfig.clojure_lsp.setup{}
 
-lspconfig.rust_analyzer.setup {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-}
+lspconfig.rust_analyzer.setup {}
 
 lspconfig.tsserver.setup{}

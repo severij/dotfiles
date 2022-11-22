@@ -1,7 +1,4 @@
-local load_successful, lualine = pcall(require, 'lualine')
-
--- In case lualine isn't installed yet:
-if not load_successful then return end
+local lualine = require'lualine'
 
 lualine.setup {
   options = {
