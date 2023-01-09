@@ -84,6 +84,7 @@ return require'packer'.startup(function (use)
     requires = 'nvim-lua/plenary.nvim',
     config = function()
       vim.keymap.set('n', '<Leader>gd', '<Cmd>DiffviewOpen<CR>')
+      vim.keymap.set('n', '<Leader>gD', ':DiffviewOpen ')
       vim.keymap.set('n', '<Leader>gh', '<Cmd>DiffviewFileHistory %<CR>')
     end
   }
@@ -93,6 +94,7 @@ return require'packer'.startup(function (use)
     'ggandor/leap.nvim',
     config = function() require'leap'.add_default_mappings() end
   }
+  use {'akinsho/toggleterm.nvim', config = function() require'config.toggleterm' end }
 
   if packer_bootstrap then
     require('packer').sync()

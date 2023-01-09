@@ -7,7 +7,8 @@ nvim_tree.setup {
   view = {
     adaptive_size = true
   },
-  sync_root_with_cwd = true
+  sync_root_with_cwd = true,
+  respect_buf_cwd = true
 }
 
 local api = require('nvim-tree.api')
