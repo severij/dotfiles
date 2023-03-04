@@ -67,8 +67,10 @@ return require'packer'.startup(function (use)
   }
   use {
     'sainnhe/everforest',
-    after = 'lualine.nvim',
-    config = 'vim.cmd[[colorscheme everforest]]'
+    config = function()
+      vim.g.everforest_background = 'soft'
+      vim.cmd('colorscheme everforest')
+    end
   }
   use "lukas-reineke/indent-blankline.nvim"
   use {
@@ -94,6 +96,11 @@ return require'packer'.startup(function (use)
     'ggandor/leap.nvim',
     config = function() require'leap'.add_default_mappings() end
   }
+  use {
+    'mfussenegger/nvim-dap',
+    config = function() require'config.dap' end
+  }
+
 
   if packer_bootstrap then
     require('packer').sync()
