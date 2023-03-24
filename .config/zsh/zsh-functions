@@ -1,0 +1,9 @@
+function include() {
+    [ -f "$ZDOTDIR/$1" ] && source "$ZDOTDIR/$1"
+}
+
+function plugin() {
+    if [ -d "$ZDOTDIR/plugins/$1" ]; then
+        include "plugins/$1/$1.plugin.zsh" || include "plugins/$1/$1.zsh"
+    fi
+}
