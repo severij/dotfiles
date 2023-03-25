@@ -5,16 +5,37 @@ require'telescope'.setup {
 }
 
 local builtin = require'telescope.builtin'
+local conf = require'telescope.config'.values
 
-local function find_dotfiles()
-  builtin.find_files {
-    hidden = true,
-    -- Not a very elegant solution but works.
-    cwd = vim.fn.fnamemodify(
-      vim.fn.system('readlink -f ~/.config/nvim/init.lua'),
-      ':p:h:h:h:h'
-    )
-  }
+local dotfiles = function(opts)
+  opts = opts or {}
+  local home = os.getenv('HOME')
+  opts.cwd = home
+  opts.entry_maker = function(entry)
+    local path = '~/' .. entry
+    return {
+      value = path,
+      display = path,
+      ordinal = entry
+    }
+  end
+  require'telescope.pickers'.new(opts, {
+    prompt_title = 'dotfiles',
+    file_ignore_patterns = { 'zsh/plugins' },
+    finder = require'telescope.finders'.new_oneshot_job(
+      {
+        'git',
+        '--git-dir=.dotfiles',
+        '--work-tree=.',
+        'ls-tree',
+        '-r',
+        'master',
+        '--name-only',
+      }, opts
+    ),
+    sorter = conf.generic_sorter(opts),
+    previewer = conf.file_previewer(opts)
+  }):find()
 end
 
 vim.keymap.set('n', '<Leader>ff', builtin.find_files)
@@ -26,5 +47,6 @@ vim.keymap.set('n', '<Leader>fb', function() builtin.buffers {
 } end)
 vim.keymap.set('n', '<Leader>fr', builtin.oldfiles)
 vim.keymap.set('n', '<Leader>fc', builtin.commands)
-vim.keymap.set('n', '<Leader>f.', find_dotfiles)
+vim.keymap.set('n', '<Leader>f.', dotfiles)
 vim.keymap.set('n', '<Leader>fh', builtin.help_tags)
+vim.keymap.set('n', '<Leader>fo', builtin.colorscheme)
