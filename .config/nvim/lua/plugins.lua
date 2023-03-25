@@ -66,11 +66,8 @@ return require'packer'.startup(function (use)
     config = function() require'config.nvim-tree' end
   }
   use {
-    'sainnhe/everforest',
-    config = function()
-      vim.g.everforest_background = 'soft'
-      vim.cmd('colorscheme everforest')
-    end
+    'ellisonleao/gruvbox.nvim',
+    config = function() vim.cmd('colorscheme gruvbox') end
   }
   use "lukas-reineke/indent-blankline.nvim"
   use {
@@ -91,11 +88,6 @@ return require'packer'.startup(function (use)
     end
   }
   use { 'lewis6991/gitsigns.nvim', config = function() require'config.gitsigns' end }
-  use 'Olical/conjure'
-  use {
-    'ggandor/leap.nvim',
-    config = function() require'leap'.add_default_mappings() end
-  }
   use {
     'mfussenegger/nvim-dap',
     config = function() require'config.dap' end
