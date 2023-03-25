@@ -1,1 +1,4 @@
 ZDOTDIR=$HOME/.config/zsh
+
+TYPEWRITTEN_PROMPT_LAYOUT="singleline_verbose"
+TYPEWRITTEN_RELATIVE_PATH="adaptive"
