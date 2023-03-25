@@ -7,3 +7,75 @@
 [submodule ".config/zsh/plugins/typewritten"]
 	path = .config/zsh/plugins/typewritten
 	url = https://github.com/reobin/typewritten
+[submodule ".config/nvim/pack/plugins/opt/nvim-web-devicons"]
+	path = .config/nvim/pack/plugins/opt/nvim-web-devicons
+	url = https://github.com/nvim-tree/nvim-web-devicons
+[submodule ".config/nvim/pack/plugins/opt/gruvbox.nvim"]
+	path = .config/nvim/pack/plugins/opt/gruvbox.nvim
+	url = https://github.com/ellisonleao/gruvbox.nvim
+[submodule ".config/nvim/pack/plugins/start/plenary.nvim"]
+	path = .config/nvim/pack/plugins/start/plenary.nvim
+	url = https://github.com/nvim-lua/plenary.nvim
+[submodule ".config/nvim/pack/plugins/start/lualine.nvim"]
+	path = .config/nvim/pack/plugins/start/lualine.nvim
+	url = https://github.com/nvim-lualine/lualine.nvim
+[submodule ".config/nvim/pack/plugins/start/diffview.nvim"]
+	path = .config/nvim/pack/plugins/start/diffview.nvim
+	url = https://github.com/sindrets/diffview.nvim
+[submodule ".config/nvim/pack/plugins/start/telescope.nvim"]
+	path = .config/nvim/pack/plugins/start/telescope.nvim
+	url = https://github.com/nvim-telescope/telescope.nvim
+[submodule ".config/nvim/pack/plugins/start/nvim-dap"]
+	path = .config/nvim/pack/plugins/start/nvim-dap
+	url = https://github.com/mfussenegger/nvim-dap
+[submodule ".config/nvim/pack/plugins/start/nvim-tree.lua"]
+	path = .config/nvim/pack/plugins/start/nvim-tree.lua
+	url = https://github.com/nvim-tree/nvim-tree.lua
+[submodule ".config/nvim/pack/plugins/start/Comment.nvim"]
+	path = .config/nvim/pack/plugins/start/Comment.nvim
+	url = https://github.com/numToStr/Comment.nvim
+[submodule ".config/nvim/pack/plugins/start/bufdelete.nvim"]
+	path = .config/nvim/pack/plugins/start/bufdelete.nvim
+	url = https://github.com/famiu/bufdelete.nvim
+[submodule ".config/nvim/pack/plugins/start/indent-blankline.nvim"]
+	path = .config/nvim/pack/plugins/start/indent-blankline.nvim
+	url = https://github.com/lukas-reineke/indent-blankline.nvim
+[submodule ".config/nvim/pack/plugins/start/gitsigns.nvim"]
+	path = .config/nvim/pack/plugins/start/gitsigns.nvim
+	url = https://github.com/lewis6991/gitsigns.nvim
+[submodule ".config/nvim/pack/plugins/start/nvim-lspconfig"]
+	path = .config/nvim/pack/plugins/start/nvim-lspconfig
+	url = https://github.com/neovim/nvim-lspconfig
+[submodule ".config/nvim/pack/plugins/start/mason-lspconfig.nvim"]
+	path = .config/nvim/pack/plugins/start/mason-lspconfig.nvim
+	url = https://github.com/williamboman/mason-lspconfig.nvim
+[submodule ".config/nvim/pack/plugins/start/mason.nvim"]
+	path = .config/nvim/pack/plugins/start/mason.nvim
+	url = https://github.com/williamboman/mason.nvim
+[submodule ".config/nvim/pack/plugins/start/nvim-cmp"]
+	path = .config/nvim/pack/plugins/start/nvim-cmp
+	url = https://github.com/hrsh7th/nvim-cmp
+[submodule ".config/nvim/pack/plugins/start/cmp-nvim-lsp"]
+	path = .config/nvim/pack/plugins/start/cmp-nvim-lsp
+	url = https://github.com/hrsh7th/cmp-nvim-lsp
+[submodule ".config/nvim/pack/plugins/start/cmp-buffer"]
+	path = .config/nvim/pack/plugins/start/cmp-buffer
+	url = https://github.com/hrsh7th/cmp-buffer
+[submodule ".config/nvim/pack/plugins/start/cmp-path"]
+	path = .config/nvim/pack/plugins/start/cmp-path
+	url = https://github.com/hrsh7th/cmp-path
+[submodule ".config/nvim/pack/plugins/start/cmp-cmdline"]
+	path = .config/nvim/pack/plugins/start/cmp-cmdline
+	url = https://github.com/hrsh7th/cmp-cmdline
+[submodule ".config/nvim/pack/plugins/start/cmp_luasnip"]
+	path = .config/nvim/pack/plugins/start/cmp_luasnip
+	url = https://github.com/saadparwaiz1/cmp_luasnip
+[submodule ".config/nvim/pack/plugins/start/LuaSnip"]
+	path = .config/nvim/pack/plugins/start/LuaSnip
+	url = https://github.com/L3MON4D3/LuaSnip
+[submodule ".config/nvim/pack/plugins/start/neogit"]
+	path = .config/nvim/pack/plugins/start/neogit
+	url = https://github.com/TimUntersberger/neogit
+[submodule ".config/nvim/pack/plugins/start/nvim-treesitter"]
+	path = .config/nvim/pack/plugins/start/nvim-treesitter
+	url = https://github.com/nvim-treesitter/nvim-treesitter

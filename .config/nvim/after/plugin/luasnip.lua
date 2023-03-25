@@ -1,4 +1,5 @@
-local luasnip = require'luasnip'
+local has_luasnip, luasnip = pcall(require, 'luasnip')
+if not has_luasnip then return end
 
 luasnip.setup({
   region_check_events = "CursorHold,InsertLeave,InsertEnter",

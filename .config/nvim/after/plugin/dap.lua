@@ -1,4 +1,5 @@
-local dap = require'dap'
+local has_dap, dap = pcall(require, 'dap')
+if not has_dap then return end
 
 vim.fn.sign_define('DapBreakpoint', {text='●', texthl='red', linehl='', numhl=''})
 
@@ -11,14 +12,19 @@ vim.keymap.set('n', '<Leader>do', dap.step_out, opts)
 vim.keymap.set('n', '<Leader>dn', dap.step_over, opts)
 vim.keymap.set('n', '<Leader>dq', dap.list_breakpoints, opts)
 
-dap.adapters.codelldb = {
-  type = 'server',
-  port = "${port}",
-  executable = {
-    command = require'mason-registry'.get_package('codelldb'):get_install_path() .. '/extension/adapter/codelldb',
-    args = {"--port", "${port}"}
-  }
-}
+
+local has_mason_registry, mason_registry = pcall(require, 'mason-registry')
+
+-- if has_mason_registry then
+--   dap.adapters.codelldb = {
+--     type = 'server',
+--     port = "${port}",
+--     executable = {
+--       command = require'mason-registry'.get_package('codelldb'):get_install_path() .. '/extension/adapter/codelldb',
+--       args = {"--port", "${port}"}
+--     }
+--   }
+-- end
 
 dap.configurations.rust = {
   {

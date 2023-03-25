@@ -1,8 +1,5 @@
-local load_successful, treesitter = pcall(require, 'treesitter.configs')
-
--- In case treesitter isn't installed yet:
-if not load_successful then return end
-
+local has_treesitter, treesitter = pcall(require, 'treesitter.configs')
+if not has_treesitter then return end
 
 treesitter_configs.setup {
   playground = {

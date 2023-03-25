@@ -1,7 +1,11 @@
-require'mason'.setup()
-require'mason-lspconfig'.setup()
+local has_lspconfig, lspconfig = pcall(require, 'lspconfig')
+if not has_lspconfig then return end
 
-local lspconfig = require'lspconfig'
+local has_mason, mason = pcall(require, 'mason')
+if has_mason then mason.setup() end
+local has_mason_lspconfig, mason_lspconfig = pcall(require, 'mason-lspconfig')
+if has_mason_lspconfig then mason_lspconfig.setup() end
+
 
 -- Keymaps
 local opts = { noremap = true, silent = true }
@@ -28,7 +32,10 @@ lspconfig.lua_ls.setup {
     Lua = {
       runtime = { version = 'LuaJIT' },
       diagnostics = { globals = {'vim'} },
-      workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+        checkThirdParty = false
+      },
       telemetry = { enable = false },
     },
   },

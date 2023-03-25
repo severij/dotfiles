@@ -1,3 +1,6 @@
+local has_telescope, telescope = pcall(require, 'telescope')
+if not has_telescope then return end
+
 require'telescope'.setup {
   defaults = {
     file_ignore_patterns = { '%.git' }
@@ -21,7 +24,7 @@ local dotfiles = function(opts)
   end
   require'telescope.pickers'.new(opts, {
     prompt_title = 'dotfiles',
-    file_ignore_patterns = { 'zsh/plugins' },
+    file_ignore_patterns = { 'zsh/plugins', 'nvim/pack/plugins' },
     finder = require'telescope.finders'.new_oneshot_job(
       {
         'git',

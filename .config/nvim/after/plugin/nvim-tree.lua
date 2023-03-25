@@ -1,7 +1,5 @@
-local load_successful, nvim_tree = pcall(require, 'nvim-tree')
-
--- In case nvim-tree isn't installed yet:
-if not load_successful then return end
+local has_nvim_tree, nvim_tree = pcall(require, 'nvim-tree')
+if not has_nvim_tree then return end
 
 nvim_tree.setup {
   view = {

@@ -1,8 +1,7 @@
+require 'globals'
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
-
-require'plugins'
-require'config.quickfix'
 
 local options = {
   termguicolors = true,
@@ -31,7 +30,6 @@ for option, value in pairs(options) do
 end
 
 vim.keymap.set('n', '<Esc>', '<Cmd>nohl<CR><Esc>') -- Clear the search highlighting whenever <Esc> is pressed.                           
-vim.keymap.set('n', '<C-c>', '<Cmd>Bwipeout<CR>')  -- Wipeout a buffer.
 
 vim.cmd 'highlight WinSeparator guibg=None'
 vim.cmd 'autocmd TermOpen * setlocal nonumber norelativenumber | startinsert'
