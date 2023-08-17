@@ -1,11 +1,29 @@
-local has_lspconfig, lspconfig = pcall(require, 'lspconfig')
-if not has_lspconfig then return end
+require'mason'.setup()
 
-local has_mason, mason = pcall(require, 'mason')
-if has_mason then mason.setup() end
-local has_mason_lspconfig, mason_lspconfig = pcall(require, 'mason-lspconfig')
-if has_mason_lspconfig then mason_lspconfig.setup() end
+local mason_lspconfig = require'mason-lspconfig'
+local lspconfig = require'lspconfig'
 
+mason_lspconfig.setup()
+mason_lspconfig.setup_handlers {
+  function(server_name)
+    lspconfig[server_name].setup {}
+  end,
+  lua_ls = function()
+    lspconfig.lua_ls.setup {
+      settings = {
+        Lua = {
+          runtime = { version = 'LuaJIT' },
+          diagnostics = { globals = {'vim'} },
+          workspace = {
+            library = vim.api.nvim_get_runtime_file("", true),
+            checkThirdParty = false
+          },
+          telemetry = { enable = false },
+        },
+      },
+    }
+  end
+}
 
 -- Keymaps
 local opts = { noremap = true, silent = true }
@@ -24,27 +42,3 @@ vim.keymap.set('n', '<Bslash>wr', vim.lsp.buf.remove_workspace_folder, opts)
 vim.keymap.set('n', '<Bslash>wl', function()
   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 end, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-
-lspconfig.lua_ls.setup {
-  settings = {
-    Lua = {
-      runtime = { version = 'LuaJIT' },
-      diagnostics = { globals = {'vim'} },
-      workspace = {
-        library = vim.api.nvim_get_runtime_file("", true),
-        checkThirdParty = false
-      },
-      telemetry = { enable = false },
-    },
-  },
-}
-
-lspconfig.pylsp.setup{}
-
-lspconfig.clojure_lsp.setup{}
-
-lspconfig.rust_analyzer.setup {}
-
-lspconfig.tsserver.setup{}

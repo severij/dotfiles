@@ -1,7 +1,4 @@
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
-
-source ~/.bash_aliases
+. ~/.bash_aliases
 
 set_prompt() {
 
@@ -28,5 +25,9 @@ set_prompt() {
 
   PS1+="\[\e[0m\]\n└─> "
 }
+
+export PATH=$PATH:$HOME/.local/bin
+export PROMPT_COMMAND="set_prompt"
+export EDITOR=nvim
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
