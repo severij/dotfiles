@@ -1,0 +1,27 @@
+[alias]
+  a = add
+  d = diff
+  l = log --graph --decorate --oneline --all
+  s = status
+
+[diff]
+  colorMoved = zebra
+
+[github]
+  user = severij
+
+[pull]
+  rebase = true
+
+[push]
+  default = current
+
+[rebase]
+  autosquash = true
+
+[rerere]
+  autoupdate = true
+  enabled = true
+
+[user]
+  name = Severi Jääskeläinen
