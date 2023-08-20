@@ -45,6 +45,16 @@ return {
     end
   },
   {
+    'sindrets/diffview.nvim',
+    config = function()
+      require'diffview'.setup {
+        default_args = {
+          DiffviewOpen = { '--imply-local' },
+        }
+      }
+    end
+  },
+  {
     "NeogitOrg/neogit",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -122,17 +132,26 @@ return {
     config = function() require'config.cmp' end
   },
   {
-      "folke/neodev.nvim", opts = {}
+      "folke/neodev.nvim"
   },
   {
       'rcarriga/nvim-notify',
       config = function() vim.notify = require'notify' end
   },
-  { 'lukas-reineke/indent-blankline.nvim' },
+  {
+    'lukas-reineke/indent-blankline.nvim'
+  },
   {
       'stevearc/oil.nvim',
-      opts = {},
       dependencies = { "nvim-tree/nvim-web-devicons" },
       config = function() require'oil'.setup() end
+  },
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter"
+  },
+  {
+    'tpope/vim-sleuth',
+    lazy = false
   }
 }

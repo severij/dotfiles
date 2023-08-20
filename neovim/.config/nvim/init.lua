@@ -13,6 +13,7 @@ local options = {
   shiftwidth = 4,
   ignorecase = true,
   smartcase = true,
+  swapfile = false,
   cursorline = true,
   showmatch = true,
   splitright = true,
