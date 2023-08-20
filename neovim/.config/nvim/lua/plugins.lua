@@ -36,7 +36,10 @@ return {
     config = function()
       require'telescope'.setup {
         defaults = {
-          file_ignore_patterns = { '%.git' }
+          file_ignore_patterns = {
+            '%.git',
+            'node_modules/'
+          }
         }
       }
     end
@@ -65,7 +68,8 @@ return {
   },
   {
     'numToStr/Comment.nvim',
-    lazy = false
+    lazy = false,
+    config = function() require'Comment'.setup() end
   },
   {
     'famiu/bufdelete.nvim'
@@ -116,5 +120,19 @@ return {
       'hrsh7th/cmp-cmdline'
     },
     config = function() require'config.cmp' end
+  },
+  {
+      "folke/neodev.nvim", opts = {}
+  },
+  {
+      'rcarriga/nvim-notify',
+      config = function() vim.notify = require'notify' end
+  },
+  { 'lukas-reineke/indent-blankline.nvim' },
+  {
+      'stevearc/oil.nvim',
+      opts = {},
+      dependencies = { "nvim-tree/nvim-web-devicons" },
+      config = function() require'oil'.setup() end
   }
 }

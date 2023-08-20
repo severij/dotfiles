@@ -1,4 +1,5 @@
 require'mason'.setup()
+require'neodev'.setup()
 
 local mason_lspconfig = require'mason-lspconfig'
 local lspconfig = require'lspconfig'
@@ -9,28 +10,20 @@ mason_lspconfig.setup_handlers {
     lspconfig[server_name].setup {}
   end,
   lua_ls = function()
-    lspconfig.lua_ls.setup {
+    lspconfig.lua_ls.setup({
       settings = {
         Lua = {
-          runtime = { version = 'LuaJIT' },
-          diagnostics = { globals = {'vim'} },
-          workspace = {
-            library = vim.api.nvim_get_runtime_file("", true),
-            checkThirdParty = false
-          },
-          telemetry = { enable = false },
-        },
-      },
-    }
+          completion = {
+            callSnippet = "Replace"
+          }
+        }
+      }
+    })
   end
 }
 
 -- Keymaps
 local opts = { noremap = true, silent = true }
-vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, opts)
-vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
 vim.keymap.set('n', '<Bslash>t', vim.lsp.buf.type_definition, opts)
 vim.keymap.set('n', '<Bslash>a', vim.lsp.buf.code_action, opts)
 vim.keymap.set('n', '<Bslash>s', vim.lsp.buf.signature_help, opts)

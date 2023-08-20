@@ -2,10 +2,12 @@ local wk = require'which-key'
 
 wk.register({
   g = {
-    D = { vim.lsp.buf.declaration, 'Jump to the declaration of the symbol' },
-    d = { vim.lsp.buf.definition, 'Jump to the definition of the symbol' },
+    D = { vim.lsp.buf.declaration, 'Jump to the declaration' },
+    I = { vim.lsp.buf.implementation, 'Jump to the implementation' },
+    d = { vim.lsp.buf.definition, 'Jump to the definition' },
     r = { vim.lsp.buf.references, 'List references to the symbol' }
   },
+  ['-'] = { require'oil'.open, 'Open parent directory' },
   ['['] = {
     c = { '<Cmd>cprev<CR>', 'Previous quickfix error' },
     d = { vim.diagnostic.goto_prev, 'Previous diagnostic' },
