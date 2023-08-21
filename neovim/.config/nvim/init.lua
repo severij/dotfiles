@@ -4,26 +4,27 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
 
 local options = {
-  termguicolors = true,
-  laststatus = 3,
-  number = true,
-  wrap = false,
-  wrapscan = false,
-  expandtab = true,
-  shiftwidth = 4,
-  ignorecase = true,
-  smartcase = true,
-  swapfile = false,
-  cursorline = true,
-  showmatch = true,
-  splitright = true,
-  splitbelow = true,
-  mouse = 'a',
-  undofile = true,
-  confirm = true,
   background = 'dark',
+  cmdheight = 0,
+  confirm = true,
+  cursorline = true,
+  expandtab = true,
+  ignorecase = true,
+  jumpoptions = 'stack',
+  laststatus = 3,
+  mouse = 'a',
+  number = true,
+  shiftwidth = 4,
+  showmatch = true,
+  smartcase = true,
+  splitbelow = true,
+  splitright = true,
+  swapfile = false,
+  termguicolors = true,
+  undofile = true,
   winbar = '%f',
-  jumpoptions = 'stack'
+  wrap = false,
+  wrapscan = false
 }
 
 for option, value in pairs(options) do
