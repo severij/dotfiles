@@ -41,6 +41,8 @@ wk.register({
     },
     g = {
       name = 'Git',
+      S = { require'gitsigns'.stage_buffer, 'Stage all hunks in the current buffer' },
+      U = { require'gitsigns'.reset_buffer_index, 'Unstage all hunks for current buffer in the index' },
       b = { require'gitsigns'.blame_line, 'Blame line' },
       d = { '<Cmd>DiffviewOpen<CR>', 'Open Diffview' },
       h = { '<Cmd>DiffviewFileHistory %<CR>', 'Open history of the current file in Diffview' },
