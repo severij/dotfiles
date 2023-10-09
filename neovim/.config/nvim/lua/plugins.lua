@@ -132,6 +132,10 @@ return {
     config = function() require'config.cmp' end
   },
   {
+    "L3MON4D3/LuaSnip",
+    version = "v2.*",
+  },
+  {
       "folke/neodev.nvim"
   },
   {
