@@ -132,6 +132,12 @@ return {
     config = function() require'config.cmp' end
   },
   {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+    opts = {},
+    config = function(_, opts) require 'lsp_signature'.setup(opts) end
+  },
+  {
     "L3MON4D3/LuaSnip",
     version = "v2.*",
   },
