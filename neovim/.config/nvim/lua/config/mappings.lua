@@ -19,6 +19,10 @@ wk.register({
     h = { require'gitsigns'.next_hunk, 'Next hunk' }
   },
   ['<C-c>'] = { '<Cmd>Bwipeout<CR>', 'Delete the current buffer, keep window layout' },
+  ['<C-h>'] = { '<C-w>h', 'Move to a window on the left' },
+  ['<C-j>'] = { '<C-w>j', 'Move to a window below current one' },
+  ['<C-k>'] = { '<C-w>k', 'Move to a window above current one' },
+  ['<C-l>'] = { '<C-w>l', 'Move to a window on the right' },
   ['<leader>'] = {
     f = {
       name = 'Telescope',
