@@ -14,8 +14,8 @@ return {
   },
   {
     'nvim-treesitter/nvim-treesitter-textobjects',
-    after = "nvim-treesitter",
-    requires = "nvim-treesitter/nvim-treesitter"
+    after = 'nvim-treesitter',
+    requires = 'nvim-treesitter/nvim-treesitter'
   },
   {
     'williamboman/mason.nvim',
@@ -35,8 +35,8 @@ return {
     config = function() require'ibl'.setup() end
   },
   {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
+    'folke/which-key.nvim',
+    event = 'VeryLazy',
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
@@ -69,11 +69,11 @@ return {
     end
   },
   {
-    "NeogitOrg/neogit",
+    'NeogitOrg/neogit',
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-      "sindrets/diffview.nvim",
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'sindrets/diffview.nvim',
     },
     config = true
   },
@@ -146,17 +146,17 @@ return {
     config = function() require'config.cmp' end
   },
   {
-    "ray-x/lsp_signature.nvim",
-    event = "VeryLazy",
+    'ray-x/lsp_signature.nvim',
+    event = 'VeryLazy',
     opts = {},
     config = function(_, opts) require 'lsp_signature'.setup(opts) end
   },
   {
-    "L3MON4D3/LuaSnip",
-    version = "v2.*",
+    'L3MON4D3/LuaSnip',
+    version = 'v2.*',
   },
   {
-      "folke/neodev.nvim"
+      'folke/neodev.nvim'
   },
   -- currently experimenting with the plugins below
   {
@@ -165,12 +165,31 @@ return {
   },
   {
       'stevearc/oil.nvim',
-      dependencies = { "nvim-tree/nvim-web-devicons" },
+      dependencies = { 'nvim-tree/nvim-web-devicons' },
       config = function() require'oil'.setup() end
   },
   {
     'windwp/nvim-autopairs',
-    event = "InsertEnter",
+    event = 'InsertEnter',
     config = function() require'nvim-autopairs'.setup() end
+  },
+  {
+    'kylechui/nvim-surround',
+    version = '*',
+    event = 'VeryLazy',
+    config = function() require('nvim-surround').setup {
+      keymaps = {
+        insert = '<C-g>s',
+        insert_line = '<C-g>S',
+        normal = 's',
+        normal_cur = 'ss',
+        normal_line = 'S',
+        normal_cur_line = 'SS',
+        visual = 's',
+        visual_line = 'S',
+        delete = 'ds',
+        change = 'cs'
+        }
+    } end
   }
 }
