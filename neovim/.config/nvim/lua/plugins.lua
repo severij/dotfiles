@@ -27,6 +27,14 @@ return {
     config = function() require'config.lsp' end
   },
   {
+    'tpope/vim-sleuth',
+    lazy = false
+  },
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    config = function() require'ibl'.setup() end
+  },
+  {
     "folke/which-key.nvim",
     event = "VeryLazy",
     init = function()
@@ -150,12 +158,10 @@ return {
   {
       "folke/neodev.nvim"
   },
+  -- currently experimenting with the plugins below
   {
       'rcarriga/nvim-notify',
       config = function() vim.notify = require'notify' end
-  },
-  {
-    'lukas-reineke/indent-blankline.nvim'
   },
   {
       'stevearc/oil.nvim',
@@ -164,10 +170,7 @@ return {
   },
   {
     'windwp/nvim-autopairs',
-    event = "InsertEnter"
-  },
-  {
-    'tpope/vim-sleuth',
-    lazy = false
+    event = "InsertEnter",
+    config = function() require'nvim-autopairs'.setup() end
   }
 }
