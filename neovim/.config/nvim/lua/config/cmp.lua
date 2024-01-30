@@ -66,6 +66,7 @@ cmp.setup {
     ['<C-f>'] = cmp.mapping.scroll_docs(2 * SCROLL_DOCS_AMOUNT)
   },
   sources = cmp.config.sources({
+    { name = 'conjure'},
     { name = 'luasnip' },
     { name = 'nvim_lsp' },
     { name = 'path' },
