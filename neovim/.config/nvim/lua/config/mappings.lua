@@ -9,6 +9,8 @@ end
 
 vim.keymap.set('n', 'j', with_jump('j'), { expr = true})
 vim.keymap.set('n', 'k', with_jump('k'), { expr = true})
+vim.keymap.set('n', '<LeftMouse>', "m'<LeftMouse>")
+vim.keymap.set('n', '<RightMouse>', "m'<RightMouse>")
 
 wk.register({
   g = {
