@@ -1,5 +1,15 @@
 local wk = require'which-key'
 
+local with_jump = function(motion)
+  return function()
+    local count = vim.v.count
+    return (count > 1 and "m'" .. count or '') .. motion
+  end
+end
+
+vim.keymap.set('n', 'j', with_jump('j'), { expr = true})
+vim.keymap.set('n', 'k', with_jump('k'), { expr = true})
+
 wk.register({
   g = {
     D = { vim.lsp.buf.declaration, 'Jump to the declaration' },
