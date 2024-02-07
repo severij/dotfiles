@@ -14,6 +14,7 @@ local options = {
   laststatus = 3,
   mouse = 'a',
   number = true,
+  relativenumber = true,
   shiftwidth = 4,
   showmatch = true,
   smartcase = true,
