@@ -193,5 +193,13 @@ return {
         }
     } end
   },
-  'Olical/conjure'
+  'Olical/conjure',
+  {
+    'stevearc/dressing.nvim',
+    opts = {},
+  },
+  {
+    'stevearc/overseer.nvim',
+    opts = {},
+  }
 }

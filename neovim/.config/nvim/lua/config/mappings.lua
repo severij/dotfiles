@@ -65,6 +65,27 @@ wk.register({
       g = { require'neogit'.open, 'Open Neogit' },
       s = { require'gitsigns'.stage_hunk, 'Stage hunk at the cursor position' },
       r = { require'gitsigns'.reset_hunk, 'Reset hunk at the cursor position' }
+    },
+    o = {
+      a = { '<Cmd>OverseerQuickAction<CR>', 'Run an action on the most recebt task, or the task under the cursor' },
+      A = { '<Cmd>OverseerTaskAction<CR>', 'Select a task to run an action on' },
+      b = {
+        d = { require'overseer'.delete_task_bundle, 'Delete a saved task bundle'},
+        l = { require'overseer'.load_task_bundle, 'Load tasks from a saved bundle'},
+        s = { require'overseer'.save_task_bundle, 'Save tasks to a bundle on disk'}
+      },
+      B = {
+        { '<Cmd>OverseerBuild<CR>', 'Open the task builder' }
+      },
+      g = { require'overseer'.toggle, 'Toggle Overseer task list'},
+      o = { '<Cmd>OverseerRun<CR>', 'Run a task from template' },
+      O = { '<Cmd>OverseerRunCmd<CR>', 'Run a raw shell command' },
+      r = { '<Cmd>OverseerQuickAction restart<CR>', 'Restart previously executed action' },
+      f = { '<Cmd>OverseerQuickAction open float<CR>', 'Open in a floating window' },
+      h = { '<Cmd>OverseerQuickAction open hsplit<CR>', 'Open in a horizontal split' },
+      v = { '<Cmd>OverseerQuickAction open vsplit<CR>', 'Open in a vertical split' },
+      t = { '<Cmd>OverseerQuickAction open tab<CR>', 'Open in a tab' },
+
     }
   }
 }, {})
