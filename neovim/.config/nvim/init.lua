@@ -36,6 +36,7 @@ vim.keymap.set('n', '<Esc>', '<Cmd>nohl<CR><Esc>') -- Clear the search highlight
 
 vim.cmd 'highlight WinSeparator guibg=None'
 vim.cmd 'autocmd TermOpen * setlocal nonumber norelativenumber | startinsert'
+vim.cmd 'autocmd TextYankPost * silent! lua vim.highlight.on_yank()'
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
