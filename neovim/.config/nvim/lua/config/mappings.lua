@@ -1,4 +1,4 @@
-local wk = require'which-key'
+local wk = require 'which-key'
 
 local with_jump = function(motion)
   return function()
@@ -19,16 +19,24 @@ wk.register({
     d = { vim.lsp.buf.definition, 'Jump to the definition' },
     r = { vim.lsp.buf.references, 'List references to the symbol' }
   },
-  ['-'] = { require'oil'.open, 'Open parent directory' },
+  y = {
+    a = { vim.lsp.buf.code_action, 'Select a code action' },
+    f = { vim.lsp.buf.format, 'Format the buffer using the attached LSP client' },
+    t = { vim.lsp.buf.type_definition, 'Jumps to the type definition' },
+    r = { vim.lsp.buf.rename, 'Rename all references' },
+    s = { vim.lsp.buf.signature_help, 'Display signature information' },
+    ['.'] = { vim.lsp.buf.hover, 'Display hober information about the symbol' }
+  },
+  ['-'] = { require 'oil'.open, 'Open parent directory' },
   ['['] = {
     c = { '<Cmd>cprev<CR>', 'Previous quickfix error' },
     d = { vim.diagnostic.goto_prev, 'Previous diagnostic' },
-    h = { require'gitsigns'.prev_hunk, 'Previous hunk' }
+    h = { require 'gitsigns'.prev_hunk, 'Previous hunk' }
   },
   [']'] = {
     c = { '<Cmd>cnext<CR>', 'Previous quickfix error' },
     d = { vim.diagnostic.goto_next, 'Next diagnostic' },
-    h = { require'gitsigns'.next_hunk, 'Next hunk' }
+    h = { require 'gitsigns'.next_hunk, 'Next hunk' }
   },
   ['<C-c>'] = { '<Cmd>Bwipeout<CR>', 'Delete the current buffer, keep window layout' },
   ['<C-h>'] = { '<C-w>h', 'Move to a window on the left' },
@@ -38,14 +46,14 @@ wk.register({
   ['<leader>'] = {
     f = {
       name = 'Telescope',
-      b = { require'telescope.builtin'.buffers, 'Buffers' },
-      c = { require'telescope.builtin'.commands, 'Commands' },
-      f = { require'telescope.builtin'.find_files, 'Find files' },
-      g = { require'telescope.builtin'.live_grep, 'Live grep' },
-      h = { require'telescope.builtin'.help_tags, 'Help tags' },
-      o = { require'telescope.builtin'.oldfiles, 'Previously opened files' },
+      b = { require 'telescope.builtin'.buffers, 'Buffers' },
+      c = { require 'telescope.builtin'.commands, 'Commands' },
+      f = { require 'telescope.builtin'.find_files, 'Find files' },
+      g = { require 'telescope.builtin'.live_grep, 'Live grep' },
+      h = { require 'telescope.builtin'.help_tags, 'Help tags' },
+      o = { require 'telescope.builtin'.oldfiles, 'Previously opened files' },
       ['.'] = { function()
-        require'telescope.builtin'.find_files {
+        require 'telescope.builtin'.find_files {
           hidden = true,
           -- Not a very elegant solution but works.
           cwd = vim.fn.fnamemodify(
@@ -57,9 +65,9 @@ wk.register({
     },
     g = {
       name = 'Git',
-      S = { require'gitsigns'.stage_buffer, 'Stage all hunks in the current buffer' },
-      U = { require'gitsigns'.reset_buffer_index, 'Unstage all hunks for current buffer in the index' },
-      b = { require'gitsigns'.blame_line, 'Blame line' },
+      S = { require 'gitsigns'.stage_buffer, 'Stage all hunks in the current buffer' },
+      U = { require 'gitsigns'.reset_buffer_index, 'Unstage all hunks for current buffer in the index' },
+      b = { require 'gitsigns'.blame_line, 'Blame line' },
       d = { '<Cmd>DiffviewOpen<CR>', 'Open Diffview' },
       h = { '<Cmd>DiffviewFileHistory %<CR>', 'Open history of the current file in Diffview' },
       g = { require'neogit'.open, 'Open Neogit' },
@@ -84,8 +92,7 @@ wk.register({
       f = { '<Cmd>OverseerQuickAction open float<CR>', 'Open in a floating window' },
       h = { '<Cmd>OverseerQuickAction open hsplit<CR>', 'Open in a horizontal split' },
       v = { '<Cmd>OverseerQuickAction open vsplit<CR>', 'Open in a vertical split' },
-      t = { '<Cmd>OverseerQuickAction open tab<CR>', 'Open in a tab' },
-
+      t = { '<Cmd>OverseerQuickAction open tab<CR>', 'Open in a tab' }
     }
   }
 }, {})
