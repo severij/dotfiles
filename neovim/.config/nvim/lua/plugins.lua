@@ -201,5 +201,23 @@ return {
   {
     'stevearc/overseer.nvim',
     opts = {},
+  },
+  {
+    'akinsho/toggleterm.nvim',
+    version = "*",
+    config = function()
+      require'toggleterm'.setup {
+        start_in_insert = false,
+        direction = 'float',
+        highlights = {
+          NormalFloat = {
+            guibg = '#202020'
+          }
+        },
+        float_opts = {
+          border = 'curved'
+        }
+      }
+    end
   }
 }

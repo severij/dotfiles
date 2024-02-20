@@ -36,7 +36,7 @@ end
 vim.keymap.set('n', '<Esc>', ':nohl<CR>:lua require"notify".dismiss()<CR><Esc>')
 
 vim.cmd 'highlight WinSeparator guibg=None'
-vim.cmd 'autocmd TermOpen * setlocal nonumber norelativenumber | startinsert'
+vim.cmd 'autocmd TermOpen * setlocal nonumber norelativenumber'
 vim.cmd 'autocmd TextYankPost * silent! lua vim.highlight.on_yank()'
 
 -- Bootstrap lazy.nvim

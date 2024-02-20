@@ -43,7 +43,15 @@ wk.register({
   ['<C-j>'] = { '<C-w>j', 'Move to a window below current one' },
   ['<C-k>'] = { '<C-w>k', 'Move to a window above current one' },
   ['<C-l>'] = { '<C-w>l', 'Move to a window on the right' },
-  ['<leader>'] = {
+  ['<C-Space>'] = { '<Cmd>ToggleTerm<CR>', 'Toggle terminal'},
+  ['<C-S-Space>'] = { '<Cmd>ToggleTermSetName<CR>', 'Toggle terminal'},
+  ['<Leader>'] = {
+    ['<Leader>'] = { '<Cmd>TermSelect<CR>', 'Select terminal' },
+    ['<C-Space>'] = { '<Cmd>ToggleTermSetName<CR>', 'Set name for terminal'},
+    ['1'] = { '<Cmd>ToggleTerm 1<CR>', 'Toggle terminal 1'},
+    ['2'] = { '<Cmd>ToggleTerm 2<CR>', 'Toggle terminal 2'},
+    ['3'] = { '<Cmd>ToggleTerm 3<CR>', 'Toggle terminal 3'},
+    ['4'] = { '<Cmd>ToggleTerm 4<CR>', 'Toggle terminal 4'},
     f = {
       name = 'Telescope',
       b = { require 'telescope.builtin'.buffers, 'Buffers' },
@@ -96,3 +104,7 @@ wk.register({
     }
   }
 }, {})
+
+wk.register({
+  ['<C-Space>']  = { '<Cmd>ToggleTerm<CR>', 'Toggle terminal' }
+}, { mode = 't' })
