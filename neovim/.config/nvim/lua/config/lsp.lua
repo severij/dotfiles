@@ -1,5 +1,4 @@
 require'mason'.setup()
-require'neodev'.setup()
 
 local mason_lspconfig = require'mason-lspconfig'
 local lspconfig = require'lspconfig'

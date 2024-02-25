@@ -12,15 +12,24 @@ return {
     build = ':TSUpdate',
     config = true
   },
+  {
+    'stevearc/oil.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function() require'oil'.setup() end
   },
   {
     'williamboman/mason.nvim',
     dependencies = {
       'neovim/nvim-lspconfig',
-      'williamboman/mason-lspconfig.nvim'
+      'williamboman/mason-lspconfig.nvim',
+      'mfussenegger/nvim-dap',
+      'rcarriga/nvim-dap-ui'
     },
     lazy = false,
-    config = function() require'config.lsp' end
+    config = function()
+      require'config.lsp'
+      require'dapui'.setup()
+    end
   },
   {
     'tpope/vim-sleuth',
@@ -33,10 +42,6 @@ return {
   {
     'folke/which-key.nvim',
     event = 'VeryLazy',
-    init = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-    end,
     config = function() require'config.mappings' end
   },
   {
@@ -91,45 +96,13 @@ return {
     lazy = false,
     config = function() require'Comment'.setup() end
   },
-  {
-    'famiu/bufdelete.nvim'
-  },
+  'famiu/bufdelete.nvim',
   {
     'nvim-lualine/lualine.nvim',
     dependencies = {
       'nvim-tree/nvim-web-devicons'
     },
-    config = function()
-      require'lualine'.setup {
-        options = {
-          icons_enabled = true,
-          theme = 'auto',
-          component_separators = { left = '', right = '' },
-          section_separators = { left = '', right = '' },
-          disabled_filetypes = {},
-          always_divide_middle = true,
-          globalstatus = true,
-        },
-        sections = {
-          lualine_a = { 'mode' },
-          lualine_b = { 'branch', 'diff', 'diagnostics' },
-          lualine_c = { 'filename' },
-          lualine_x = { 'encoding', 'fileformat', 'filetype' },
-          lualine_y = { 'progress' },
-          lualine_z = { 'location' }
-        },
-        inactive_sections = {
-          lualine_a = {},
-          lualine_b = {},
-          lualine_c = { 'filename' },
-          lualine_x = { 'location' },
-          lualine_y = {},
-          lualine_z = {}
-        },
-        tabline = {},
-        extensions = {}
-      }
-    end
+    config = true
   },
   {
     'hrsh7th/nvim-cmp',
@@ -153,23 +126,11 @@ return {
     version = 'v2.*',
   },
   {
-      'folke/neodev.nvim'
-  },
-  -- currently experimenting with the plugins below
-  {
       'rcarriga/nvim-notify',
       config = function() vim.notify = require'notify' end
   },
-  {
-      'stevearc/oil.nvim',
-      dependencies = { 'nvim-tree/nvim-web-devicons' },
-      config = function() require'oil'.setup() end
-  },
-  {
-    'windwp/nvim-autopairs',
-    event = 'InsertEnter',
-    config = function() require'nvim-autopairs'.setup() end
-  },
+  'Olical/conjure',
+  -- currently experimenting with the plugins below
   {
     'kylechui/nvim-surround',
     version = '*',
@@ -189,31 +150,8 @@ return {
         }
     } end
   },
-  'Olical/conjure',
   {
     'stevearc/dressing.nvim',
     opts = {},
-  },
-  {
-    'stevearc/overseer.nvim',
-    opts = {},
-  },
-  {
-    'akinsho/toggleterm.nvim',
-    version = "*",
-    config = function()
-      require'toggleterm'.setup {
-        start_in_insert = false,
-        direction = 'float',
-        highlights = {
-          NormalFloat = {
-            guibg = '#202020'
-          }
-        },
-        float_opts = {
-          border = 'curved'
-        }
-      }
-    end
   }
 }
