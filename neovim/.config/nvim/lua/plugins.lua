@@ -10,12 +10,8 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    config = function() require'config.treesitter' end
+    config = true
   },
-  {
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    after = 'nvim-treesitter',
-    requires = 'nvim-treesitter/nvim-treesitter'
   },
   {
     'williamboman/mason.nvim',
