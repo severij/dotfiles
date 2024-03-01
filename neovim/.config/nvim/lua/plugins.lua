@@ -153,5 +153,10 @@ return {
   {
     'stevearc/dressing.nvim',
     opts = {},
+  },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    config = true
   }
 }
