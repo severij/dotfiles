@@ -4,7 +4,6 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
 
 local options = {
-  backspace = '',
   clipboard = 'unnamedplus',
   cmdheight = 0,
   colorcolumn = "+1",
