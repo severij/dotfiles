@@ -23,7 +23,8 @@ return {
       'neovim/nvim-lspconfig',
       'williamboman/mason-lspconfig.nvim',
       'mfussenegger/nvim-dap',
-      'rcarriga/nvim-dap-ui'
+      'rcarriga/nvim-dap-ui',
+      'nvim-neotest/nvim-nio'
     },
     lazy = false,
     config = function()
@@ -90,11 +91,6 @@ return {
         }
       }
     end
-  },
-  {
-    'numToStr/Comment.nvim',
-    lazy = false,
-    config = function() require'Comment'.setup() end
   },
   'famiu/bufdelete.nvim',
   {

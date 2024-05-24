@@ -58,18 +58,15 @@ wk.register({
       v = { toggle_virtualedit, 'Toggle virtualedit' },
       w = { toggle_option('wrap'), 'Toggle wrap' },
       c = { toggle_colorcolumn, 'Toggle colorcolumn' }
-    },
-    ['.'] = { vim.lsp.buf.hover, 'Display hober information about the symbol' }
+    }
   },
   ['-'] = { require 'oil'.open, 'Open parent directory' },
   ['['] = {
     c = { '<Cmd>cprev<CR>', 'Previous quickfix error' },
-    d = { vim.diagnostic.goto_prev, 'Previous diagnostic' },
     h = { require 'gitsigns'.prev_hunk, 'Previous hunk' }
   },
   [']'] = {
     c = { '<Cmd>cnext<CR>', 'Previous quickfix error' },
-    d = { vim.diagnostic.goto_next, 'Next diagnostic' },
     h = { require 'gitsigns'.next_hunk, 'Next hunk' }
   },
   ['<C-c>'] = { '<Cmd>Bwipeout<CR>', 'Delete the current buffer, keep window layout' },
