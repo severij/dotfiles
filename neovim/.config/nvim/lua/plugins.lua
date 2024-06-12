@@ -47,7 +47,7 @@ return {
   },
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.5',
+    tag = '0.1.6',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       require'telescope'.setup {
@@ -125,6 +125,16 @@ return {
       'rcarriga/nvim-notify',
       config = function() vim.notify = require'notify' end
   },
+  {
+    "FabijanZulj/blame.nvim",
+    config = function()
+      require("blame").setup()
+    end
+  },
+  {
+    'stevearc/dressing.nvim',
+    opts = {},
+  },
   'Olical/conjure',
   -- currently experimenting with the plugins below
   {
@@ -145,14 +155,5 @@ return {
         change = 'cs'
         }
     } end
-  },
-  {
-    'stevearc/dressing.nvim',
-    opts = {},
-  },
-  {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    config = true
   }
 }

@@ -35,6 +35,10 @@ local toggle_option = function(option)
   return function() vim.o[option] = not vim.o[option] end
 end
 
+local toggle_inlay_hint = function()
+  return function() lsp.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end
+end
+
 vim.keymap.set('n', 'j', with_jump('j'), { expr = true })
 vim.keymap.set('n', 'k', with_jump('k'), { expr = true })
 vim.keymap.set('n', '<LeftMouse>', "m'<LeftMouse>")
@@ -55,6 +59,7 @@ wk.register({
     s = { vim.lsp.buf.signature_help, 'Display signature information' },
     o = {
       b = { toggle_background, 'Toggle background' },
+      h = { toggle_inlay_hint, 'Toggle inlay hint' },
       v = { toggle_virtualedit, 'Toggle virtualedit' },
       w = { toggle_option('wrap'), 'Toggle wrap' },
       c = { toggle_colorcolumn, 'Toggle colorcolumn' }
@@ -106,7 +111,7 @@ wk.register({
       name = 'Git',
       S = { require 'gitsigns'.stage_buffer, 'Stage all hunks in the current buffer' },
       U = { require 'gitsigns'.reset_buffer_index, 'Unstage all hunks for current buffer in the index' },
-      b = { require 'gitsigns'.blame_line, 'Blame line' },
+      b = { '<Cmd>BlameToggle<CR>', 'Toggle Git blame' },
       d = { '<Cmd>DiffviewOpen<CR>', 'Open Diffview' },
       h = { '<Cmd>DiffviewFileHistory %<CR>', 'Open history of the current file in Diffview' },
       g = { require 'neogit'.open, 'Open Neogit' },
