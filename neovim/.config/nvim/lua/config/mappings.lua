@@ -44,79 +44,59 @@ vim.keymap.set('n', 'k', with_jump('k'), { expr = true })
 vim.keymap.set('n', '<LeftMouse>', "m'<LeftMouse>")
 vim.keymap.set('n', '<RightMouse>', "m'<RightMouse>")
 
-wk.register({
-  g = {
-    D = { vim.lsp.buf.declaration, 'Jump to the declaration' },
-    I = { vim.lsp.buf.implementation, 'Jump to the implementation' },
-    d = { vim.lsp.buf.definition, 'Jump to the definition' },
-    r = { vim.lsp.buf.references, 'List references to the symbol' }
+wk.add({
+  {'gD', vim.lsp.buf.declaration, desc = 'Goto declaration (LSP)'},
+  {'gI', vim.lsp.buf.implementation, desc = 'Goto implementation (LSP)'},
+  {'gd', vim.lsp.buf.definition, desc = 'Goto definition (LSP)'},
+  {'gr', vim.lsp.buf.references, desc = 'List references to the symbol'},
+  {'ya', vim.lsp.buf.code_action, desc = 'Select a code action'},
+  {'yf', vim.lsp.buf.format, desc = 'Format the buffer using the attached LSP client'},
+  {'yt', vim.lsp.buf.type_definition, desc = 'Jumps to the type definition'},
+  {'yr', vim.lsp.buf.rename, desc = 'Rename all references'},
+  {'ys', vim.lsp.buf.signature_help, desc = 'Display signature information'},
+  {'yo', group = 'Options'},
+  {'yob', toggle_background, desc = 'Toggle background'},
+  {'yoh', toggle_inlay_hint, desc = 'Toggle inlay hint'},
+  {'yov', toggle_virtualedit, desc = 'Toggle virtualedit'},
+  {'yow', toggle_option('wrap'), desc = 'Toggle wrap'},
+  {'yoc', toggle_colorcolumn, desc = 'Toggle colorcolumn'},
+  {'-', require 'oil'.open, desc = 'Open parent directory'},
+  {'[', group = 'Jump to previous ...'},
+  {'[c', '<Cmd>cprev<CR>', desc = 'quickfix error'},
+  {'[h', require 'gitsigns'.prev_hunk, desc = 'hunk'},
+  {']', group = 'Jump to next ...'},
+  {']c', '<Cmd>cnext<CR>', desc = 'quickfix error'},
+  {']h', require 'gitsigns'.next_hunk, desc = 'hunk'},
+  {'<C-c>', '<Cmd>Bwipeout<CR>', desc = 'Delete the current buffer, keep window layout' },
+  {'<C-h>', '<C-w>h', desc = 'Move to a window on the left' },
+  {'<C-j>', '<C-w>j', desc = 'Move to a window below current one' },
+  {'<C-k>', '<C-w>k', desc = 'Move to a window above current one' },
+  {'<C-l>', '<C-w>l', desc = 'Move to a window on the right' },
+  {'<Leader>f', group = 'Find'},
+  {'<Leader>fb', require 'telescope.builtin'.buffers, desc = 'Buffers' },
+  {'<Leader>fc', require 'telescope.builtin'.commands, desc = 'Commands' },
+  {'<Leader>ff', require 'telescope.builtin'.find_files, desc = 'Files in current working directory' },
+  {'<Leader>fg', require 'telescope.builtin'.live_grep, desc = 'Live grep' },
+  {'<Leader>fh', require 'telescope.builtin'.help_tags, desc = 'Help tags' },
+  {'<Leader>fo', require 'telescope.builtin'.oldfiles, desc = 'Previously opened files' },
+  {'<Leader>f.', function()
+      require 'telescope.builtin'.find_files {
+        hidden = true,
+        -- Not a very elegant solution but works.
+        cwd = vim.fn.fnamemodify(
+          vim.fn.system('readlink -f ~/.config/nvim/init.lua'),
+          ':p:h:h:h:h'
+        )
+      }
+    end, desc = 'Dotfiles'
   },
-  y = {
-    a = { vim.lsp.buf.code_action, 'Select a code action' },
-    f = { vim.lsp.buf.format, 'Format the buffer using the attached LSP client' },
-    t = { vim.lsp.buf.type_definition, 'Jumps to the type definition' },
-    r = { vim.lsp.buf.rename, 'Rename all references' },
-    s = { vim.lsp.buf.signature_help, 'Display signature information' },
-    o = {
-      b = { toggle_background, 'Toggle background' },
-      h = { toggle_inlay_hint, 'Toggle inlay hint' },
-      v = { toggle_virtualedit, 'Toggle virtualedit' },
-      w = { toggle_option('wrap'), 'Toggle wrap' },
-      c = { toggle_colorcolumn, 'Toggle colorcolumn' }
-    }
-  },
-  ['-'] = { require 'oil'.open, 'Open parent directory' },
-  ['['] = {
-    c = { '<Cmd>cprev<CR>', 'Previous quickfix error' },
-    h = { require 'gitsigns'.prev_hunk, 'Previous hunk' }
-  },
-  [']'] = {
-    c = { '<Cmd>cnext<CR>', 'Previous quickfix error' },
-    h = { require 'gitsigns'.next_hunk, 'Next hunk' }
-  },
-  ['<C-c>'] = { '<Cmd>Bwipeout<CR>', 'Delete the current buffer, keep window layout' },
-  ['<C-h>'] = { '<C-w>h', 'Move to a window on the left' },
-  ['<C-j>'] = { '<C-w>j', 'Move to a window below current one' },
-  ['<C-k>'] = { '<C-w>k', 'Move to a window above current one' },
-  ['<C-l>'] = { '<C-w>l', 'Move to a window on the right' },
-  ['<C-Space>'] = { '<Cmd>ToggleTerm<CR>', 'Toggle terminal' },
-  ['<C-S-Space>'] = { '<Cmd>ToggleTermSetName<CR>', 'Toggle terminal' },
-  ['<Leader>'] = {
-    ['<Leader>'] = { '<Cmd>TermSelect<CR>', 'Select terminal' },
-    ['<C-Space>'] = { '<Cmd>ToggleTermSetName<CR>', 'Set name for terminal' },
-    ['1'] = { '<Cmd>ToggleTerm 1<CR>', 'Toggle terminal 1' },
-    ['2'] = { '<Cmd>ToggleTerm 2<CR>', 'Toggle terminal 2' },
-    ['3'] = { '<Cmd>ToggleTerm 3<CR>', 'Toggle terminal 3' },
-    ['4'] = { '<Cmd>ToggleTerm 4<CR>', 'Toggle terminal 4' },
-    f = {
-      name = 'Telescope',
-      b = { require 'telescope.builtin'.buffers, 'Buffers' },
-      c = { require 'telescope.builtin'.commands, 'Commands' },
-      f = { require 'telescope.builtin'.find_files, 'Files in current working directory' },
-      g = { require 'telescope.builtin'.live_grep, 'Live grep' },
-      h = { require 'telescope.builtin'.help_tags, 'Help tags' },
-      o = { require 'telescope.builtin'.oldfiles, 'Previously opened files' },
-      ['.'] = { function()
-        require 'telescope.builtin'.find_files {
-          hidden = true,
-          -- Not a very elegant solution but works.
-          cwd = vim.fn.fnamemodify(
-            vim.fn.system('readlink -f ~/.config/nvim/init.lua'),
-            ':p:h:h:h:h'
-          )
-        }
-      end, 'Dotfiles' }
-    },
-    g = {
-      name = 'Git',
-      S = { require 'gitsigns'.stage_buffer, 'Stage all hunks in the current buffer' },
-      U = { require 'gitsigns'.reset_buffer_index, 'Unstage all hunks for current buffer in the index' },
-      b = { '<Cmd>BlameToggle<CR>', 'Toggle Git blame' },
-      d = { '<Cmd>DiffviewOpen<CR>', 'Open Diffview' },
-      h = { '<Cmd>DiffviewFileHistory %<CR>', 'Open history of the current file in Diffview' },
-      g = { require 'neogit'.open, 'Open Neogit' },
-      s = { require 'gitsigns'.stage_hunk, 'Stage hunk at the cursor position' },
-      r = { require 'gitsigns'.reset_hunk, 'Reset hunk at the cursor position' }
-    }
-  }
-}, {})
+  {'<Leader>g', group = 'Git'},
+  {'<Leader>gS', require 'gitsigns'.stage_buffer, desc = 'Stage all hunks in the current buffer'},
+  {'<Leader>gU', require 'gitsigns'.reset_buffer_index, desc = 'Unstage all hunks for current buffer in the index'},
+  {'<Leader>gb', '<Cmd>BlameToggle<CR>', desc = 'Toggle Git blame'},
+  {'<Leader>gd', '<Cmd>DiffviewOpen<CR>', desc = 'Open Diffview'},
+  {'<Leader>gh', '<Cmd>DiffviewFileHistory %<CR>', desc = 'Open history of the current file in Diffview'},
+  {'<Leader>gg', require 'neogit'.open, desc = 'Open Neogit'},
+  {'<Leader>gs', require 'gitsigns'.stage_hunk, desc = 'Stage hunk at the cursor position'},
+  {'<Leader>gr', require 'gitsigns'.reset_hunk, desc = 'Reset hunk at the cursor position'}
+})
