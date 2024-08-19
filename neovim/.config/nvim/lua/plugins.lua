@@ -18,7 +18,8 @@ return {
           'luadoc',
           'vim',
           'lua',
-          'markdown'
+          'markdown',
+          'query'
         }
       }
     end
