@@ -45,10 +45,6 @@ return {
     end
   },
   {
-    'tpope/vim-sleuth',
-    lazy = false
-  },
-  {
     'lukas-reineke/indent-blankline.nvim',
     config = function() require'ibl'.setup() end
   },
