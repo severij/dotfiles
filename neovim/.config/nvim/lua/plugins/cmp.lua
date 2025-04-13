@@ -1,6 +1,10 @@
 return {
   'saghen/blink.cmp',
-  dependencies = { 'rafamadriz/friendly-snippets', 'fang2hou/blink-copilot' },
+  dependencies = {
+    'rafamadriz/friendly-snippets',
+    'fang2hou/blink-copilot',
+    'Kaiser-Yang/blink-cmp-avante'
+  },
   version = '1.*',
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
@@ -14,8 +18,12 @@ return {
       documentation = { auto_show = true }
     },
     sources = {
-      default = { 'copilot', 'lsp', 'path', 'snippets', 'buffer' },
+      default = { 'avante', 'copilot', 'lsp', 'path', 'snippets', 'buffer' },
       providers = {
+        avante = {
+          module = 'blink-cmp-avante',
+          name = 'Avante',
+        },
         copilot = {
           name = 'copilot',
           module = 'blink-copilot',
