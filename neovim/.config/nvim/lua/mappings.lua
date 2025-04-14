@@ -39,5 +39,8 @@ return {
     mode = {'n', 't'},
     {'<C-Tab>', '<Cmd>TermSelect<CR>', desc = 'Select'},
     {'<C-`>', '<Cmd>ToggleTermSetName<CR>', desc = 'Set name'}
-  }
+  },
+  {'<Leader>d', group = 'Debug'},
+  {'<Leader>D', group = 'Dadbod'},
+  {'<Leader>DD', '<Cmd>DBUIToggle<CR>', desc = 'Toggle UI'}
 }

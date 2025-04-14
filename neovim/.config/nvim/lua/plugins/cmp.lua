@@ -19,6 +19,9 @@ return {
     },
     sources = {
       default = { 'avante', 'copilot', 'lsp', 'path', 'snippets', 'buffer' },
+      per_filetype = {
+        sql = { 'snippets', 'dadbod', 'buffer' },
+      },
       providers = {
         avante = {
           module = 'blink-cmp-avante',
@@ -29,6 +32,10 @@ return {
           module = 'blink-copilot',
           score_offset = 100,
           async = true
+        },
+        dadbod = {
+          name = "Dadbod",
+          module = "vim_dadbod_completion.blink"
         }
       }
     },
