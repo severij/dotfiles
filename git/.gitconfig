@@ -4,6 +4,9 @@
   l = log --graph --decorate --oneline --all
   s = status
 
+[core]
+  editor = nvim
+
 [diff]
   colorMoved = zebra
 
@@ -25,3 +28,9 @@
 
 [user]
   name = Severi Jääskeläinen
+
+[includeIf "gitdir:~/work/"]
+  path = ~/work/.gitconfig
+
+[includeIf "gitdir:~/personal/"]
+  path = ~/personal/.gitconfig
