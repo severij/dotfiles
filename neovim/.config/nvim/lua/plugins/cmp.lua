@@ -18,7 +18,15 @@ return {
       documentation = { auto_show = true }
     },
     sources = {
-      default = { 'avante', 'copilot', 'lsp', 'path', 'snippets', 'buffer' },
+      default = {
+        'lazydev',
+        'avante',
+        'copilot',
+        'lsp',
+        'path',
+        'snippets',
+        'buffer'
+      },
       per_filetype = {
         sql = { 'snippets', 'dadbod', 'buffer' },
       },
@@ -36,6 +44,11 @@ return {
         dadbod = {
           name = "Dadbod",
           module = "vim_dadbod_completion.blink"
+        },
+        lazydev = {
+            name = "LazyDev",
+            module = "lazydev.integrations.blink",
+            score_offset = 101,
         }
       }
     },
