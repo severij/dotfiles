@@ -1,3 +1,20 @@
+local fzf_lua_projects = function()
+  local path = require'fzf-lua'.path
+  require('fzf-lua').files({
+    prompt = 'Projects> ',
+    cwd = '$HOME',
+    fd_opts = "--type d --exec test -e {}/.git \\; --exec echo {} \\; . ~/work ~/personal",
+    actions = {
+      ['default'] = function(selected)
+        local dir = os.getenv('HOME') .. '/' .. path.entry_to_file(selected[1]).path
+        -- local dir = vim.fn.fnamemodify(path.entry_to_file(selected[1]).path, ":p")
+        vim.notify('Opening ' .. dir)
+        vim.cmd('tcd ' .. dir)
+      end
+    }
+  })
+end
+
 return {
   {'-', require 'oil'.open, desc = 'Open parent directory'},
   {'[h', require 'gitsigns'.prev_hunk, desc = 'Jump to next hunk'},
@@ -7,6 +24,7 @@ return {
   {'<Leader>f<Space>', require 'fzf-lua'.resume, desc = 'Resume' },
   {'<Leader>fb', require 'fzf-lua'.buffers, desc = 'Open buffers' },
   {'<Leader>ff', require 'fzf-lua'.files, desc = 'Files in CWD' },
+  {'<Leader>fp', fzf_lua_projects, desc = 'Projects'},
   {'<Leader>ft', require 'fzf-lua'.tabs, desc = 'Open tabs' },
   {'<Leader>fo', require 'fzf-lua'.oldfiles, desc = 'Opened files history' },
   {'<Leader>fc', require 'fzf-lua'.commands, desc = 'Commands' },
