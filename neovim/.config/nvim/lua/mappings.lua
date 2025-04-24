@@ -17,8 +17,8 @@ end
 
 return {
   {'-', require 'oil'.open, desc = 'Open parent directory'},
-  {'[h', require 'gitsigns'.prev_hunk, desc = 'Jump to next hunk'},
-  {']h', require 'gitsigns'.next_hunk, desc = 'Jump to previous hunk'},
+  {'[h', function() require 'gitsigns'.nav_hunk('prev') end, desc = 'Jump to next hunk'},
+  {']h', function() require 'gitsigns'.nav_hunk('next') end, desc = 'Jump to previous hunk'},
   {'<Leader>a', group = 'Avante'},
   {'<Leader>f', group = 'FZF'},
   {'<Leader>f<Space>', require 'fzf-lua'.resume, desc = 'Resume' },
@@ -47,7 +47,10 @@ return {
       hidden = true
     }:toggle()
   end, desc = 'Lazygit'},
-  {'<Leader>h', function() require'harpoon':list():add() end},
+  {'<Leader>h', function()
+    require'harpoon':list():add()
+    vim.notify('Added current file to Harpoon')
+  end},
   {'<Leader><Leader>', function() require'harpoon'.ui:toggle_quick_menu(require'harpoon':list()) end},
   {'<Leader>1', function() require'harpoon':list():select(1) end},
   {'<Leader>2', function() require'harpoon':list():select(2) end},
