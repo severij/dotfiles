@@ -38,6 +38,9 @@ local options = {
 for option, value in pairs(options) do
   vim.opt[option] = value
 end
+--
+ -- Clear the search highlighting and notifications whenever <Esc> is pressed.                           
+vim.keymap.set('n', '<Esc>', ':nohl<CR>:lua require"notify".dismiss()<CR><Esc>', { silent = true })
 
 vim.cmd 'highlight WinSeparator guibg=None'
 vim.cmd 'autocmd TermOpen * setlocal nonumber norelativenumber'
