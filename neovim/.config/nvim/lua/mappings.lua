@@ -19,6 +19,7 @@ return {
   {'-', require 'oil'.open, desc = 'Open parent directory'},
   {'[h', function() require 'gitsigns'.nav_hunk('prev') end, desc = 'Jump to next hunk'},
   {']h', function() require 'gitsigns'.nav_hunk('next') end, desc = 'Jump to previous hunk'},
+  {'<C-c>', '<Cmd>bp<Bar>sp<Bar>bn<Bar>bd<CR>', desc = 'Delete buffer without closing window'},
   {'<Leader>a', group = 'Avante'},
   {'<Leader>f', group = 'FZF'},
   {'<Leader>f<Space>', require 'fzf-lua'.resume, desc = 'Resume' },
