@@ -28,7 +28,7 @@ return {
         'buffer'
       },
       per_filetype = {
-        sql = { 'snippets', 'dadbod', 'buffer' },
+        sql = { 'snippets', 'buffer' },
       },
       providers = {
         avante = {
@@ -40,10 +40,6 @@ return {
           module = 'blink-copilot',
           score_offset = 100,
           async = true
-        },
-        dadbod = {
-          name = "Dadbod",
-          module = "vim_dadbod_completion.blink"
         },
         lazydev = {
             name = "LazyDev",
