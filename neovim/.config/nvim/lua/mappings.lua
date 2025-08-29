@@ -49,17 +49,6 @@ return {
       hidden = true
     }:toggle()
   end, desc = 'Lazygit'},
-  {'<Leader>h', function()
-    require'harpoon':list():add()
-    vim.notify('Added current file to Harpoon')
-  end},
-  {'<Leader><Leader>', function() require'harpoon'.ui:toggle_quick_menu(require'harpoon':list()) end},
-  {'<Leader>1', function() require'harpoon':list():select(1) end},
-  {'<Leader>2', function() require'harpoon':list():select(2) end},
-  {'<Leader>3', function() require'harpoon':list():select(3) end},
-  {'<Leader>4', function() require'harpoon':list():select(4) end},
-  {'<Leader>[', function() require'harpoon':list():prev() end},
-  {'<Leader>]', function() require'harpoon':list():next() end},
   {'<Leader>gS', require 'gitsigns'.stage_buffer, desc = 'Stage all hunks in the current buffer'},
   {'<Leader>gU', require 'gitsigns'.reset_buffer_index, desc = 'Unstage all hunks for current buffer in the index'},
   {'<Leader>gb', '<Cmd>BlameToggle<CR>', desc = 'Toggle Git blame'},
