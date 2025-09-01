@@ -60,5 +60,12 @@ return {
     {'<C-Tab>', '<Cmd>TermSelect<CR>', desc = 'Select'},
     {'<C-`>', '<Cmd>ToggleTermSetName<CR>', desc = 'Set name'}
   },
-  {'<Leader>d', group = 'Debug'}
+  {'<Leader>o', group = 'Options'},
+  {'<Leader>ob', function()
+    if vim.o.background =='dark' then
+      vim.o.background = 'light'
+    else
+      vim.o.background = 'dark'
+    end
+  end, desc = 'Toggle background color'}
 }

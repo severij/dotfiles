@@ -47,3 +47,5 @@ vim.cmd 'autocmd TermOpen * setlocal nonumber norelativenumber'
 vim.cmd 'autocmd TextYankPost * silent! lua vim.highlight.on_yank()'
 
 require 'boot.lazy' -- Bootstrap lazy.nvim
+
+vim.cmd('colorscheme retrobox')
