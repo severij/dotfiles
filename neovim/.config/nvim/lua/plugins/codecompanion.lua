@@ -11,13 +11,16 @@ return {
     require('codecompanion').setup({
       strategies = {
         chat = {
-          name = 'copilot'
+          adapter = 'copilot',
+          model = "claude-sonnet-4"
         },
         inline = {
-          name = 'copilot'
+          adapter = 'copilot',
+          model = "claude-sonnet-4"
         },
         cmd = {
-          name = 'copilot'
+          adapter = 'copilot',
+          model = "claude-sonnet-4"
         }
       },
       extensions = {
