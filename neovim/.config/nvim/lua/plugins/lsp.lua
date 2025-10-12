@@ -1,6 +1,8 @@
 return {
-  'neovim/nvim-lspconfig',
-  config = function()
-    vim.lsp.enable({'clojure_lsp', 'lua_ls', 'pylsp', 'ts_ls'})
-  end
+  'mason-org/mason-lspconfig.nvim',
+  dependencies = {
+    { 'mason-org/mason.nvim', opts = {} },
+    'neovim/nvim-lspconfig'
+  },
+  opts = {}
 }
