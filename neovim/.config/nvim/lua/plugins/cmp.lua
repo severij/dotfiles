@@ -1,8 +1,7 @@
 return {
   'saghen/blink.cmp',
   dependencies = {
-    'rafamadriz/friendly-snippets',
-    'fang2hou/blink-copilot'
+    'rafamadriz/friendly-snippets'
   },
   version = '1.*',
   ---@module 'blink.cmp'
@@ -19,7 +18,6 @@ return {
     sources = {
       default = {
         'lazydev',
-        'copilot',
         'lsp',
         'path',
         'snippets',
@@ -29,12 +27,6 @@ return {
         sql = { 'snippets', 'buffer' },
       },
       providers = {
-        copilot = {
-          name = 'copilot',
-          module = 'blink-copilot',
-          score_offset = 100,
-          async = true
-        },
         lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",
