@@ -9,6 +9,14 @@ return {
   },
   config = function()
     require('codecompanion').setup({
+      display = {
+        chat = {
+          icons = {
+            chat_context = "📎️",
+          },
+          fold_context = true,
+        },
+      },
       strategies = {
         chat = {
           adapter = 'copilot',
