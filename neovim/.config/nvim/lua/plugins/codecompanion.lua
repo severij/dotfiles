@@ -5,7 +5,6 @@ return {
     'nvim-lua/plenary.nvim',
     'nvim-treesitter/nvim-treesitter',
     'zbirenbaum/copilot.lua',
-    'ravitemer/mcphub.nvim'
   },
   config = function()
     require('codecompanion').setup({
@@ -29,16 +28,6 @@ return {
         cmd = {
           adapter = 'copilot',
           model = "claude-sonnet-4"
-        }
-      },
-      extensions = {
-        mcphub = {
-          callback = 'mcphub.extensions.codecompanion',
-          opts = {
-            make_vars = true,
-            make_slash_commands = true,
-            show_result_in_chat = true
-          }
         }
       }
     })
