@@ -15,6 +15,15 @@ local fzf_lua_projects = function()
   })
 end
 
+local diffview_toggle = function()
+  local view = require('diffview.lib').get_current_view()
+  if view then
+    vim.cmd('DiffviewClose')
+  else
+    vim.cmd('DiffviewOpen')
+  end
+end
+
 return {
   {'-', require 'oil'.open, desc = 'Open parent directory'},
   {'[h', function() require 'gitsigns'.nav_hunk('prev') end, desc = 'Jump to next hunk'},
@@ -52,7 +61,7 @@ return {
   {'<Leader>gS', require 'gitsigns'.stage_buffer, desc = 'Stage all hunks in the current buffer'},
   {'<Leader>gU', require 'gitsigns'.reset_buffer_index, desc = 'Unstage all hunks for current buffer in the index'},
   {'<Leader>gb', '<Cmd>BlameToggle<CR>', desc = 'Toggle Git blame'},
-  {'<Leader>gd', '<Cmd>DiffviewOpen<CR>', desc = 'Open Diffview'},
+   {'<Leader>gd', diffview_toggle, desc = 'Toggle Diffview'},
   {'<Leader>gs', require 'gitsigns'.stage_hunk, desc = 'Stage hunk at the cursor position'},
   {'<Leader>gr', require 'gitsigns'.reset_hunk, desc = 'Reset hunk at the cursor position'},
   { -- Terminal
