@@ -1,15 +1,34 @@
 local fzf_lua_projects = function()
-  local path = require'fzf-lua'.path
-  require('fzf-lua').files({
+  local home = os.getenv('HOME')
+  
+  -- Build a map of project names to full paths
+  local projects = {}
+  local handle = io.popen(string.format(
+    "find '%s/work' '%s/personal' -maxdepth 2 -type d -name '.git' -printf '%%h\\n' 2>/dev/null",
+    home, home
+  ))
+  if handle then
+    for line in handle:lines() do
+      local name = vim.fn.fnamemodify(line, ':t')
+      projects[name] = line
+    end
+    handle:close()
+  end
+  
+  -- Create list of project names
+  local project_names = vim.tbl_keys(projects)
+  table.sort(project_names)
+  
+  require('fzf-lua').fzf_exec(project_names, {
     prompt = 'Projects> ',
-    cwd = '$HOME',
-    fd_opts = "--type d --exec test -e {}/.git \\; --exec echo {} \\; . ~/work ~/personal",
     actions = {
       ['default'] = function(selected)
-        local dir = os.getenv('HOME') .. '/' .. path.entry_to_file(selected[1]).path
-        -- local dir = vim.fn.fnamemodify(path.entry_to_file(selected[1]).path, ":p")
-        vim.notify('Opening ' .. dir)
-        vim.cmd('tcd ' .. dir)
+        local name = selected[1]
+        local dir = projects[name]
+        if dir then
+          vim.notify('Opening ' .. dir)
+          vim.cmd('tcd ' .. dir)
+        end
       end
     }
   })
