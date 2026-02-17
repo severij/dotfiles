@@ -7,6 +7,7 @@ return {
       highlight = { enable = true },
       ensure_installed = {
         'bash',
+        'java',
         'regex',
         'vimdoc',
         'luadoc',
