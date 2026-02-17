@@ -48,4 +48,10 @@ vim.cmd 'autocmd TextYankPost * silent! lua vim.highlight.on_yank()'
 
 require 'boot.lazy' -- Bootstrap lazy.nvim
 
+-- Check for missing dependencies after Neovim is fully loaded
+-- Use defer_fn to ensure noice/nvim-notify is loaded first
+vim.defer_fn(function()
+  require('health').check_dependencies()
+end, 100)
+
 vim.cmd('colorscheme retrobox')
