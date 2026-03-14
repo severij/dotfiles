@@ -4,8 +4,7 @@ local fzf_lua_projects = function()
   -- Build a map of project names to full paths
   local projects = {}
   local handle = io.popen(string.format(
-    "find '%s/work' '%s/personal' -maxdepth 2 -type d -name '.git' -printf '%%h\\n' 2>/dev/null",
-    home, home
+    "find '%s/Projects' -maxdepth 2 -type d -name '.git' -printf '%%h\\n' 2>/dev/null", home
   ))
   if handle then
     for line in handle:lines() do
