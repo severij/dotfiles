@@ -1,23 +1,22 @@
 local fzf_lua_projects = function()
-  local home = os.getenv('HOME')
-  
-  -- Build a map of project names to full paths
+  local root = os.getenv('HOME') .. '/Projects'
+
+  -- Build a map of relative project paths to full paths
   local projects = {}
   local handle = io.popen(string.format(
-    "find '%s/Projects' -maxdepth 2 -type d -name '.git' -printf '%%h\\n' 2>/dev/null", home
+    "find '%s' -type d -name '.git' -printf '%%h\\n' 2>/dev/null", root
   ))
   if handle then
     for line in handle:lines() do
-      local name = vim.fn.fnamemodify(line, ':t')
-      projects[name] = line
+      local rel = line:sub(#root + 2)
+      projects[rel] = line
     end
     handle:close()
   end
-  
-  -- Create list of project names
+
   local project_names = vim.tbl_keys(projects)
   table.sort(project_names)
-  
+
   require('fzf-lua').fzf_exec(project_names, {
     prompt = 'Projects> ',
     actions = {
