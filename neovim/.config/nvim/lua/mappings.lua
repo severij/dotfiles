@@ -1,35 +1,25 @@
 local fzf_lua_projects = function()
   local root = os.getenv('HOME') .. '/Projects'
 
-  -- Build a map of relative project paths to full paths
-  local projects = {}
-  local handle = io.popen(string.format(
-    "find '%s' -type d -name '.git' -printf '%%h\\n' 2>/dev/null", root
-  ))
-  if handle then
-    for line in handle:lines() do
-      local rel = line:sub(#root + 2)
-      projects[rel] = line
-    end
-    handle:close()
-  end
+  local cmd = string.format(
+    vim.fn.executable('fd') == 1
+    and "fd -t d --hidden --no-ignore --glob '.git' '%s' | sed 's|^%s/\\(.*\\)/\\.git/$|\\1|'"
+    or "find '%s' -type d -name '.git' -printf '%%h\\n' 2>/dev/null | sed 's|^%s/||'",
+    root, root
+  )
 
-  local project_names = vim.tbl_keys(projects)
-  table.sort(project_names)
-
-  require('fzf-lua').fzf_exec(project_names, {
-    prompt = 'Projects> ',
-    actions = {
-      ['default'] = function(selected)
-        local name = selected[1]
-        local dir = projects[name]
-        if dir then
+  require('fzf-lua').fzf_exec(cmd,
+    {
+      prompt = 'Projects> ',
+      actions = {
+        ['default'] = function(selected)
+          local dir = root .. '/' .. selected[1]
           vim.notify('Opening ' .. dir)
           vim.cmd('tcd ' .. dir)
-        end
-      end
+        end,
+      },
     }
-  })
+  )
 end
 
 local diffview_toggle = function()
